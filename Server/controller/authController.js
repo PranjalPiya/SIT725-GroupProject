@@ -11,7 +11,7 @@ const signup = async (req, res) => {
             return res.status(400).json({ message: 'Passwords do not match' });
         }
         if (!fullName || !phone || !email || !password || !confirmPassword || !gender) {
-            console.error('Missing blog fields');
+            console.error('Missing auth fields');
             return res.status(400).json({ statusCode: 400, message: 'Missing required fields' });
         }
 
