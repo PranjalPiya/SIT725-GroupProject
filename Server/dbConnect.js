@@ -23,4 +23,4 @@ async function connectDB() {
 
 connectDB();
 
-module.exports = mongoose;
+module.exports = connectDB;
