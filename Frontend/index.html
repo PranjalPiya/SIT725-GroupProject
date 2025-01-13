@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrekNepal - Discover Your Next Adventure</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/sections.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg" alt="Logo" class="nav-logo">
+                <span>TrekNepal</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="trips.html">Treks</a>
+                <a href="#">Guides</a>
+                <a href="about.html">About</a>
+                <a href="#">Contact</a>
+            </div>
+
+            <div class="nav-auth">
+                <button class="btn-login">Login</button>
+                <button class="btn-primary">Sign Up</button>
+            </div>
+
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content container">
+            <h1>Discover Your Next Adventure</h1>
+            <p>Join our community of passionate trekkers and explore the world's most breathtaking trails.</p>
+            <div class="search-box">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/search.svg" alt="Search" class="search-icon">
+                <input type="text" placeholder="Search for treks...">
+                <button class="btn-primary">Search</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="featured-trek container">
+            <div class="featured-card">
+                <div class="featured-image">
+                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" alt="Featured Trek">
+                    <span class="featured-badge">Featured Trek</span>
+                </div>
+                <div class="featured-content">
+                    <h2>Swiss Alps Adventure</h2>
+                    <div class="location">
+                        <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/map-pin.svg" alt="Location">
+                        <span>Switzerland</span>
+                    </div>
+                    <p>Experience the breathtaking beauty of the Swiss Alps on this incredible 10-day trek through pristine mountain landscapes.</p>
+                    <div class="trek-details">
+                        <div class="detail">
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/calendar.svg" alt="Duration">
+                            <span>10 days</span>
+                        </div>
+                        <div class="detail">
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/users.svg" alt="Group">
+                            <span>8 spots left</span>
+                        </div>
+                        <div class="detail">
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg" alt="Difficulty">
+                            <span>Moderate</span>
+                        </div>
+                    </div>
+                    <div class="trek-action">
+                        <div class="price">
+                            <span class="amount">$3,499</span>
+                            <span class="period">/person</span>
+                        </div>
+                        <button class="btn-primary btn-large">Reserve Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="popular-treks container">
+            <div class="section-header">
+                <h2>Popular Treks</h2>
+                <button class="btn-link">
+                    View all
+                    <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/arrow-right.svg" alt="Arrow">
+                </button>
+            </div>
+            <div class="trek-grid" id="trekGrid"></div>
+        </section>
+
+
+
+        <section class="section">
+            <div class="image-container">
+                <img src="images/trekker-1.jpg" alt="Backpackers">
+            </div>
+            <div class="content">
+                <h1>Create Unforgettable Memories With Your Love</h1>
+                <p>Pellentesque elit ullamcorper dignissim cras tincidunt lobortis. Interdum varius sit amet mattis. Posuere morbi leo urna molestie at sagittis elementum eu facilisis.</p>
+                <div class="features">
+                    <div class="feature">
+                        <img src="fire-camp-icon.png" alt="Fire Camp">
+                        <p>Fire Camp</p>
+                    </div>
+                    <div class="feature">
+                        <img src="trained-guides-icon.png" alt="Trained Guides">
+                        <p>Trained Guides</p>
+                    </div>
+                    <div class="feature">
+                        <img src="travel-info-icon.png" alt="Travel Information">
+                        <p>Travel Information</p>
+                    </div>
+                    <div class="feature">
+                        <img src="pickup-drop-icon.png" alt="Pickup and Drop">
+                        <p>Pickup And Drop</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <a href="#">More About Us</a>
+                    <a href="tel:+000123456789">Call +000 1234 56789</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="explore">
+            <h2 style="text-align: center; margin-top: 20px;">Explore Destinations</h2>
+            <div class="carousel">
+              <div class="carousel-track">
+                <div class="carousel-card">
+                  <img src="images/back-1.png" alt="Australia">
+                  <h3>Australia</h3>
+                  <p>Discover the beauty of Sydney and beyond.</p>
+                </div>
+                <div class="carousel-card">
+                  <img src="https://via.placeholder.com/300x200" alt="Switzerland">
+                  <h3>Switzerland</h3>
+                  <p>Price Starts ($175 - $200)</p>
+                </div>
+                <div class="carousel-card">
+                  <img src="https://via.placeholder.com/300x200" alt="Japan">
+                  <h3>Japan</h3>
+                  <p>Explore the cultural landmarks of Japan.</p>
+                </div>
+                <div class="carousel-card">
+                  <img src="https://via.placeholder.com/300x200" alt="Italy">
+                  <h3>Italy</h3>
+                  <p>Experience the charm of Italian cities.</p>
+                </div>
+                <div class="carousel-card">
+                  <img src="https://via.placeholder.com/300x200" alt="France">
+                  <h3>France</h3>
+                  <p>Visit the iconic Eiffel Tower and more.</p>
+                </div>
+              </div>
+              <div class="carousel-buttons">
+                <button class="carousel-button prev">&#9664;</button>
+                <button class="carousel-button next">&#9654;</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section">
+            <div class="menu-image">
+              <img src="images/trekker-1.jpg" alt="Default Image" id="menu-image">
+            </div>
+            <div class="menu-items">
+              <div class="menu-item active" data-image="images/back-1.png">Egypt</div>
+              <div class="menu-item" data-image="images/everest.jpeg">Himalayas</div>
+              <div class="menu-item" data-image="images/trekker-1.jpg"">Tanzania</div>
+              <div class="menu-item" data-image="https://via.placeholder.com/600x400/ffff7f/ffffff">Italy</div>
+              <div class="menu-item" data-image="https://via.placeholder.com/600x400/ff7fff/ffffff">Japan</div>
+            </div>
+          </section>
+
+
+
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Stay Updated</h2>
+                    <p>Subscribe to our newsletter for the latest treks and exclusive offers.</p>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Safety</a></li>
+                        <li><a href="#">Cancellation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TrekQuest. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/utils/dom.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/components/navbar.js"></script>
+    <script src="js/components/treks.js"></script>
+    <script src="js/components/newsletter.js"></script>
+</body>
+</html>
