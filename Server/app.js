@@ -5,12 +5,15 @@ const app = express();
 
 const userRoutes = require('./router/router'); // Import user routes
 const trekRoutes = require('./router/trekRouter');
+const agencyRoutes = require('./router/agencyRoutes');
 
 app.use(express.json()); // Middleware to parse JSON bodies
 
 // Use the user routes for any requests to /api/user/
 app.use('/api/user', userRoutes);
 app.use('/api/treks', trekRoutes);
+app.use('/api/agencies', agencyRoutes);
+
 app.get('/', (req, res) => {
     res.send('Hello, World!. Mongo is also added I guess');
 });
