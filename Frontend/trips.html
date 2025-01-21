@@ -1,12 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/trips.css">
   <title>Adventure Travel Locations</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/sections.css">
 </head>
+
 <body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-brand">
+        <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg" alt="Logo" class="nav-logo">
+        <span>TrekQuest</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="trips.html" class="active">Treks</a>
+        <a href="#">Guides</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <!-- <div class="nav-auth">
+        <button class="btn-login">Login</button>
+        <button class="btn-primary">Sign Up</button>
+      </div> -->
+
+      <button class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
   <section class="travel-section">
     <h2>Favorite Destination</h2>
     <h3>Trendy Adventure Travel Locations</h3>
@@ -17,4 +50,5 @@
   </section>
   <script src="js/trips.js"></script>
 </body>
+
 </html>

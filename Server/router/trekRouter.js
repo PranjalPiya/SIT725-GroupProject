@@ -1,5 +1,5 @@
 const express = require('express');
-const { createTrekDestination, getAllTrekDestinations, getTrekDestinationById } = require('../controller/trekController');
+const { createTrekDestination, getAllTrekDestinations, getTrekDestinationById, searchTrekDestinations, addReview } = require('../controller/trekController');
 const { protect, admin } = require('../middleware/authMiddleware');
 
 const router = express.Router();
@@ -9,13 +9,17 @@ const router = express.Router();
 router.post('/create', protect, admin, createTrekDestination);
 
 // Route to get all trek destinations
-router.get('/', protect, getAllTrekDestinations);
+router.get('/', getAllTrekDestinations);
 
 // Route to get single trek destination by ID
 router.get('/:id', protect, getTrekDestinationById);
 
+// Search trek destinations route
+router.get('/search', searchTrekDestinations);
 // Route to add review
-// router.post('/:id/review', addReview);
+// Route to add a review and rating to a specific trek destination
+router.post('/:id/reviews', protect, addReview);
+
 
 
 module.exports = router;
