@@ -12,7 +12,7 @@ router.post('/create', protect, admin, createTrekDestination);
 router.get('/', getAllTrekDestinations);
 
 // Route to get single trek destination by ID
-router.get('/:id', protect, getTrekDestinationById);
+router.get('/:id', getTrekDestinationById);
 
 // Search trek destinations route
 router.get('/search', searchTrekDestinations);

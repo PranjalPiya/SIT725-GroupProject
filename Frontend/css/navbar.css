@@ -19,6 +19,7 @@
     gap: 0.5rem;
     font-size: 1.25rem;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .nav-logo {
@@ -78,6 +79,7 @@
 }
 
 @media (min-width: 768px) {
+
     .nav-links,
     .nav-auth {
         display: flex;
