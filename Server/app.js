@@ -6,6 +6,9 @@ const path = require('path');
 
 const userRoutes = require('./router/router'); // Import user routes
 const trekRoutes = require('./router/trekRouter');
+const agencyRoutes = require('./router/agencyRoutes');
+const reviewRoutes = require('./router/reviewRoutes');
+const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 app.use(express.json()); // Middleware to parse JSON bodies
 
@@ -18,12 +21,14 @@ app.use(express.static(path.join(__dirname, '../Frontend')));
 // Use the user routes for any requests to /api/user/
 app.use('/api/user', userRoutes);
 app.use('/api/treks', trekRoutes);
+app.use('/api/agencies', agencyRoutes);
+app.use('/api', reviewRoutes);
 
+app.use(notFound);
+app.use(errorHandler);
 
-
-// Fallback to index.html for any other requests
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../Frontend', 'index.html'));
+app.get('/', (req, res) => {
+    res.send('Hello, World!. Mongo is also added I guess');
 });
 
 // Start the server on specified port from .env or default 3000

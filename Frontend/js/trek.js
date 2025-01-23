@@ -117,19 +117,26 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
 
 
+            const response = await fetch(`http://localhost:3000/api/treks/${trekId}`);
+            console.log(response);
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status} - ${response.statusText}`);
+            }
+    
+            const re = await response.json();
 
             // If you want to add reviews dynamically
             const reviewsList = document.getElementById('reviews-list');
 
             // Check if there are reviews
-            if (trek.reviews && trek.reviews.length > 0) {
-                trek.reviews.forEach(review => {
+            if (re.comment) {
+                re.comment.forEach(review => {
                     const reviewElement = document.createElement('div');
                     reviewElement.classList.add('review');
                     reviewElement.innerHTML = `
-                    <p><strong>User:</strong> ${review.user.fullName}</p>
+                    // <p><strong>User:</strong> ${review.user.fullName}</p>
                     <p><strong>Rating:</strong> ${review.rating}/5</p>
-                    <p>${review.review}</p>
+                    <p>${review.comment}</p>
                 `;
                     reviewsList.appendChild(reviewElement);
                 });
