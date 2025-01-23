@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function createTrekCard(trek) {
         return `
             <div class="trek-card" data-id="${trek.id}" onclick="goToTrekDetails(${trek.id})">
+            <div class="trek-card" data-id="${trek.id}" onclick="goToTrekDetails(${trek.id})">
                 <div class="trek-card-image">
                     <img src="${trek.image}" alt="${trek.title}">
                     <div class="difficulty-badge">${trek.difficulty}</div>
@@ -11,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="trek-card-content">
                     <h3 class="text-xl font-bold mb-2">${trek.title}</h3>
                     <div class="location">
-                        <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/map-pin.svg" alt="Location">
+                        <img src="images/treeker-1.jpg" alt="Location">
                         <span>${trek.location}</span>
                     </div>
                     <div class="trek-details">

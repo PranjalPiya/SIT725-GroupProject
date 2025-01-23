@@ -10,10 +10,14 @@ router.post('/create', protect, admin, createTrekDestination);
 
 // Route to get all trek destinations
 router.get('/', getAllTrekDestinations);
+router.get('/', getAllTrekDestinations);
 
 // Route to get single trek destination by ID
 router.get('/:id', getTrekDestinationById);
+router.get('/:id', getTrekDestinationById);
 
+// Search trek destinations route
+router.get('/search', searchTrekDestinations);
 // Search trek destinations route
 router.get('/search', searchTrekDestinations);
 // Route to add review

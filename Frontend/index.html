@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,9 @@
     <link rel="stylesheet" href="css/hero.css">
     <link rel="stylesheet" href="css/cards.css">
     <link rel="stylesheet" href="css/sections.css">
+    <link rel="stylesheet" href="css/guide-section.css">
 </head>
+
 
 <body>
     <nav class="navbar">
@@ -18,14 +21,18 @@
             <div class="nav-brand">
                 <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg" alt="Logo"
                     class="nav-logo">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg" alt="Logo"
+                    class="nav-logo">
                 <span>TrekNepal</span>
             </div>
+
 
             <div class="nav-links">
                 <a href="index.html" class="active">Home</a>
                 <a href="trips.html">Treks</a>
                 <a href="#">Guides</a>
                 <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
                 <a href="contact.html">Contact</a>
             </div>
 
@@ -49,6 +56,8 @@
             <div class="search-box">
                 <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/search.svg" alt="Search"
                     class="search-icon">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/search.svg" alt="Search"
+                    class="search-icon">
                 <input type="text" placeholder="Search for treks...">
                 <button class="btn-primary">Search</button>
             </div>
@@ -70,8 +79,12 @@
                     </div>
                     <p>Experience the breathtaking beauty of the Swiss Alps on this incredible 10-day trek through
                         pristine mountain landscapes.</p>
+                    <p>Experience the breathtaking beauty of the Swiss Alps on this incredible 10-day trek through
+                        pristine mountain landscapes.</p>
                     <div class="trek-details">
                         <div class="detail">
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/calendar.svg"
+                                alt="Duration">
                             <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/calendar.svg"
                                 alt="Duration">
                             <span>10 days</span>
@@ -81,6 +94,8 @@
                             <span>8 spots left</span>
                         </div>
                         <div class="detail">
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg"
+                                alt="Difficulty">
                             <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg"
                                 alt="Difficulty">
                             <span>Moderate</span>
@@ -97,6 +112,15 @@
             </div>
         </section>
 
+        <section class="guide-section">
+            <div class="guide-content">
+                <h1>Guides to Trekking Destination</h1>
+                <p>Introducing 200+ Trekking Destination Guides</p>
+                <button class="explore-button">Explore Guides</button>
+            </div>
+        </section>
+
+        <!-- 
         <section class="popular-treks container">
             <div class="section-header">
                 <h2>Popular Treks</h2>
@@ -106,7 +130,7 @@
                 </button>
             </div>
             <div class="trek-grid" id="trekGrid"></div>
-        </section>
+        </section> -->
 
 
 
@@ -116,6 +140,8 @@
             </div>
             <div class="content">
                 <h1>Create Unforgettable Memories With Your Love</h1>
+                <p>Pellentesque elit ullamcorper dignissim cras tincidunt lobortis. Interdum varius sit amet mattis.
+                    Posuere morbi leo urna molestie at sagittis elementum eu facilisis.</p>
                 <p>Pellentesque elit ullamcorper dignissim cras tincidunt lobortis. Interdum varius sit amet mattis.
                     Posuere morbi leo urna molestie at sagittis elementum eu facilisis.</p>
                 <div class="features">
@@ -149,26 +175,43 @@
 
                 <div class="carousel-track">
                     <!-- Trek destinations will be inserted here dynamically -->
-                </div>
 
-                <div class="carousel-buttons">
-                    <button class="carousel-button prev">&#9664;</button>
-                    <button class="carousel-button next">&#9654;</button>
+                    <div class="carousel-track">
+                        <!-- Trek destinations will be inserted here dynamically -->
+                    </div>
+
+                    <div class="carousel-buttons">
+                        <button class="carousel-button prev">&#9664;</button>
+                        <button class="carousel-button next">&#9654;</button>
+                    </div>
+
+                    <div class="carousel-buttons">
+                        <button class="carousel-button prev">&#9664;</button>
+                        <button class="carousel-button next">&#9654;</button>
+                    </div>
                 </div>
-            </div>
+        </section>
         </section>
 
         <section class="menu-section">
-            <div class="menu-image">
-                <img src="images/trekker-1.jpg" alt="Default Image" id="menu-image">
-            </div>
-            <div class="menu-items">
-                <div class="menu-item active" data-image="images/back-1.png">Egypt</div>
-                <div class="menu-item" data-image="images/everest.jpeg">Himalayas</div>
-                <div class="menu-item" data-image="images/trekker-1.jpg">Tanzania</div>
-                <div class=" menu-item" data-image="https://via.placeholder.com/600x400/ffff7f/ffffff">Italy</div>
-                <div class="menu-item" data-image="https://via.placeholder.com/600x400/ff7fff/ffffff">Japan</div>
-            </div>
+            <section class="menu-section">
+                <div class="menu-image">
+                    <img src="images/trekker-1.jpg" alt="Default Image" id="menu-image">
+                    <img src="images/trekker-1.jpg" alt="Default Image" id="menu-image">
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item active" data-image="images/back-1.png">Egypt</div>
+                    <div class="menu-item" data-image="images/everest.jpeg">Himalayas</div>
+                    <div class="menu-item" data-image="images/trekker-1.jpg">Tanzania</div>
+                    <div class=" menu-item" data-image="https://via.placeholder.com/600x400/ffff7f/ffffff">Italy</div>
+                    <div class="menu-item" data-image="https://via.placeholder.com/600x400/ff7fff/ffffff">Japan</div>
+                    <div class="menu-item active" data-image="images/back-1.png">Egypt</div>
+                    <div class="menu-item" data-image="images/everest.jpeg">Himalayas</div>
+                    <div class="menu-item" data-image="images/trekker-1.jpg">Tanzania</div>
+                    <div class=" menu-item" data-image="https://via.placeholder.com/600x400/ffff7f/ffffff">Italy</div>
+                    <div class="menu-item" data-image="https://via.placeholder.com/600x400/ff7fff/ffffff">Japan</div>
+                </div>
+            </section>
         </section>
 
 
@@ -192,11 +235,13 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
-                    <h3>About Us</h3>
+                    <h3>Pages</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Our Story</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Careers</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="trips.html">Treks</a></li>
+                        <li><a href="#">Guides</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -231,4 +276,7 @@
     <script src="js/auth_api.js"></script>
 </body>
 
+
 </html>
+
+</div>
