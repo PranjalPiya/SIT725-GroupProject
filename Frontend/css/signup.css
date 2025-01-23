@@ -16,29 +16,55 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: var(--gradient-bg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-image: url('https://images.unsplash.com/photo-1454496522488-7a8e488e8606?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: grid;
+    grid-template-rows: auto 1fr;
+
     height: 100vh;
     color: var(--font-color);
+
+}
+
+/* Grayish overlay */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(128, 128, 128, 0.5);
+    /* Gray color with some transparency */
+    z-index: 1;
+}
+
+body>* {
+    position: relative;
+    z-index: 2;
 }
 
 .signup-container {
     background: var(--secondary-color);
-    padding: 40px;
+    padding: 60px 40px 40px; /* Increased top padding for spacing */
     border-radius: 15px;
     box-shadow: 0 10px 20px var(--shadow-color);
     width: 100%;
     max-width: 450px;
+    margin: 0 auto;
+    align-self: center;
     animation: fadeIn 0.5s ease-in-out;
 }
+
 
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -49,7 +75,7 @@ body {
     margin-bottom: 25px;
     font-size: 30px;
     text-align: center;
-    color: var(--primary-color);
+    color: #5045e5;
 }
 
 .form-group {
@@ -81,7 +107,7 @@ body {
 .btn {
     width: 100%;
     padding: 14px;
-    background: var(--primary-color);
+    background: #5045e5;
     color: var(--secondary-color);
     border: none;
     border-radius: 8px;
@@ -92,7 +118,7 @@ body {
 }
 
 .btn:hover {
-    background: #45a049;
+    background: lightblue;
     transform: translateY(-2px);
 }
 
@@ -107,7 +133,7 @@ body {
 }
 
 .form-footer a {
-    color: var(--primary-color);
+    color: #5045e5;
     text-decoration: none;
     font-weight: bold;
 }

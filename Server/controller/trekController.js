@@ -65,7 +65,11 @@ const getAllTrekDestinations = async (req, res) => {
 // Get Single Trek Destination by ID
 const getTrekDestinationById = async (req, res) => {
     try {
-        const trek = await TrekDestination.findById(req.params.id);
+        const trek = await TrekDestination.findById(req.params.id).populate({
+            path: 'reviews.user', // Populate the user field in reviews
+            select: 'fullName' // You can choose which user fields to include
+        });
+        ;
         if (!trek) {
             return res.status(404).json({ message: 'Trek destination not found' });
         }
@@ -75,27 +79,105 @@ const getTrekDestinationById = async (req, res) => {
     }
 };
 
-// // Add Rating/Review
-// const addReview = async (req, res) => {
-//     try {
-//         const { rating, review } = req.body;
-//         const trek = await TrekDestination.findById(req.params.id);
-//         if (!trek) {
-//             return res.status(404).json({ message: 'Trek destination not found' });
-//         }
+// Search Trek Destinations with filtering and sorting
+const searchTrekDestinations = async (req, res) => {
+    try {
+        const { name, expenses, difficultyLevel, maxAltitude, totalDistance, bestSeason, sortBy, order } = req.query;
 
-//         trek.reviews.push({
-//             user: req.user._id, // Assuming user ID is stored in req.user after authentication
-//             rating,
-//             review
-//         });
+        // Create a filter object based on the query parameters
+        let filter = {};
 
-//         await trek.save();
-//         res.status(201).json({ message: 'Review added successfully', trek });
-//     } catch (error) {
-//         res.status(500).json({ message: 'Error adding review', error: error.message });
-//     }
-// };
+        // Filter by name (case-insensitive partial match)
+        if (name) {
+            filter.name = { $regex: name, $options: 'i' };
+        }
+
+        // Filter by max expenses
+        if (expenses) {
+            filter.expenses = { $lte: expenses }; // Less than or equal to the value
+        }
+
+        // Filter by difficulty level (Exact match: Easy, Medium, Hard)
+        if (difficultyLevel) {
+            filter.difficultyLevel = difficultyLevel;
+        }
+
+        // Filter by max altitude
+        if (maxAltitude) {
+            filter.maxAltitude = { $lte: maxAltitude }; // Less than or equal to the value
+        }
+
+        // Filter by total distance (less than or equal to given value)
+        if (totalDistance) {
+            filter.totalDistance = { $lte: totalDistance }; // Use string comparison or convert to number as needed
+        }
+
+        // Filter by best season
+        if (bestSeason) {
+            filter.bestSeason = bestSeason; // Exact match for season
+        }
+
+        // Sorting logic
+        let sort = {};
+        if (sortBy) {
+            const sortField = sortBy;
+            const sortOrder = order === 'desc' ? -1 : 1; // Ascending or descending order
+            sort[sortField] = sortOrder;
+        }
+
+        // Fetch filtered and sorted trek data from the database
+        const treks = await TrekDestination.find(filter).sort(sort);
+
+        // Return the filtered treks
+        res.status(200).json(treks);
+    } catch (error) {
+        console.error('Search error:', error);
+        res.status(500).json({ message: 'Error searching trek destinations', error: error.message });
+    }
+};
 
 
-module.exports = { createTrekDestination, getAllTrekDestinations, getTrekDestinationById };
+// Add review to a specific trek destination
+const addReview = async (req, res) => {
+    try {
+        const trekId = req.params.id;
+        const { rating, review } = req.body;
+
+        // Find the trek destination by ID
+        const trekDestination = await TrekDestination.findById(trekId);
+
+        if (!trekDestination) {
+            return res.status(404).json({ message: 'Trek destination not found' });
+        }
+
+        // Check if user has already submitted a review (Optional)
+        const alreadyReviewed = trekDestination.reviews.find(r => r.user.toString() === req.user._id.toString());
+        if (alreadyReviewed) {
+            return res.status(400).json({ message: 'You have already reviewed this trek' });
+        }
+
+        // Create a new review
+        const newReview = {
+            user: req.user._id, // The user ID from the token
+            rating: Number(rating),
+            review,
+        };
+
+        // Add the review to the trek's reviews array
+        trekDestination.reviews.push(newReview);
+
+        // Recalculate the average rating
+        trekDestination.averageRating = trekDestination.reviews.reduce((acc, item) => item.rating + acc, 0) / trekDestination.reviews.length;
+
+        // Save the trek destination with the new review
+        await trekDestination.save();
+
+        res.status(201).json({ message: 'Review added successfully', trekDestination });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
+module.exports = { createTrekDestination, getAllTrekDestinations, getTrekDestinationById, searchTrekDestinations, addReview };
