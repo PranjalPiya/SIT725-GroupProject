@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,26 +10,29 @@
     <link rel="stylesheet" href="css/hero.css">
     <link rel="stylesheet" href="css/cards.css">
     <link rel="stylesheet" href="css/sections.css">
+    <link rel="stylesheet" href="css/guide-section.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg" alt="Logo" class="nav-logo">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg" alt="Logo"
+                    class="nav-logo">
                 <span>TrekNepal</span>
             </div>
-            
+
             <div class="nav-links">
                 <a href="index.html" class="active">Home</a>
                 <a href="trips.html">Treks</a>
                 <a href="#">Guides</a>
                 <a href="about.html">About</a>
-                <a href="#">Contact</a>
+                <a href="contact.html">Contact</a>
             </div>
 
             <div class="nav-auth">
-                <button class="btn-login">Login</button>
-                <button class="btn-primary">Sign Up</button>
+                <a href="login.html"> <button class="btn-login">Login</button></a>
+                <a href="signup.html"> <button class="btn-primary">Sign Up</button></a>
             </div>
 
         </div>
@@ -39,7 +43,8 @@
             <h1>Discover Your Next Adventure</h1>
             <p>Join our community of passionate trekkers and explore the world's most breathtaking trails.</p>
             <div class="search-box">
-                <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/search.svg" alt="Search" class="search-icon">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/search.svg" alt="Search"
+                    class="search-icon">
                 <input type="text" placeholder="Search for treks...">
                 <button class="btn-primary">Search</button>
             </div>
@@ -59,10 +64,12 @@
                         <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/map-pin.svg" alt="Location">
                         <span>Switzerland</span>
                     </div>
-                    <p>Experience the breathtaking beauty of the Swiss Alps on this incredible 10-day trek through pristine mountain landscapes.</p>
+                    <p>Experience the breathtaking beauty of the Swiss Alps on this incredible 10-day trek through
+                        pristine mountain landscapes.</p>
                     <div class="trek-details">
                         <div class="detail">
-                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/calendar.svg" alt="Duration">
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/calendar.svg"
+                                alt="Duration">
                             <span>10 days</span>
                         </div>
                         <div class="detail">
@@ -70,7 +77,8 @@
                             <span>8 spots left</span>
                         </div>
                         <div class="detail">
-                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg" alt="Difficulty">
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg"
+                                alt="Difficulty">
                             <span>Moderate</span>
                         </div>
                     </div>
@@ -85,6 +93,15 @@
             </div>
         </section>
 
+        <section class="guide-section">
+            <div class="guide-content">
+              <h1>Guides to Trekking Destination</h1>
+              <p>Introducing 200+ Trekking Destination Guides</p>
+              <button class="explore-button">Explore Guides</button>
+            </div>
+          </section>
+          
+<!-- 
         <section class="popular-treks container">
             <div class="section-header">
                 <h2>Popular Treks</h2>
@@ -94,7 +111,7 @@
                 </button>
             </div>
             <div class="trek-grid" id="trekGrid"></div>
-        </section>
+        </section> -->
 
 
 
@@ -104,7 +121,8 @@
             </div>
             <div class="content">
                 <h1>Create Unforgettable Memories With Your Love</h1>
-                <p>Pellentesque elit ullamcorper dignissim cras tincidunt lobortis. Interdum varius sit amet mattis. Posuere morbi leo urna molestie at sagittis elementum eu facilisis.</p>
+                <p>Pellentesque elit ullamcorper dignissim cras tincidunt lobortis. Interdum varius sit amet mattis.
+                    Posuere morbi leo urna molestie at sagittis elementum eu facilisis.</p>
                 <div class="features">
                     <div class="feature">
                         <img src="fire-camp-icon.png" alt="Fire Camp">
@@ -133,52 +151,30 @@
         <section class="explore">
             <h2 style="text-align: center; margin-top: 20px;">Explore Destinations</h2>
             <div class="carousel">
-              <div class="carousel-track">
-                <div class="carousel-card">
-                  <img src="images/back-1.png" alt="Australia">
-                  <h3>Australia</h3>
-                  <p>Discover the beauty of Sydney and beyond.</p>
-                </div>
-                <div class="carousel-card">
-                  <img src="https://via.placeholder.com/300x200" alt="Switzerland">
-                  <h3>Switzerland</h3>
-                  <p>Price Starts ($175 - $200)</p>
-                </div>
-                <div class="carousel-card">
-                  <img src="https://via.placeholder.com/300x200" alt="Japan">
-                  <h3>Japan</h3>
-                  <p>Explore the cultural landmarks of Japan.</p>
-                </div>
-                <div class="carousel-card">
-                  <img src="https://via.placeholder.com/300x200" alt="Italy">
-                  <h3>Italy</h3>
-                  <p>Experience the charm of Italian cities.</p>
-                </div>
-                <div class="carousel-card">
-                  <img src="https://via.placeholder.com/300x200" alt="France">
-                  <h3>France</h3>
-                  <p>Visit the iconic Eiffel Tower and more.</p>
-                </div>
-              </div>
-              <div class="carousel-buttons">
-                <button class="carousel-button prev">&#9664;</button>
-                <button class="carousel-button next">&#9654;</button>
-              </div>
-            </div>
-          </section>
 
-          <section class="menu-section">
+                <div class="carousel-track">
+                    <!-- Trek destinations will be inserted here dynamically -->
+                </div>
+
+                <div class="carousel-buttons">
+                    <button class="carousel-button prev">&#9664;</button>
+                    <button class="carousel-button next">&#9654;</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-section">
             <div class="menu-image">
-              <img src="images/trekker-1.jpg" alt="Default Image" id="menu-image">
+                <img src="images/trekker-1.jpg" alt="Default Image" id="menu-image">
             </div>
             <div class="menu-items">
-              <div class="menu-item active" data-image="images/back-1.png">Egypt</div>
-              <div class="menu-item" data-image="images/everest.jpeg">Himalayas</div>
-              <div class="menu-item" data-image="images/trekker-1.jpg"">Tanzania</div>
-              <div class="menu-item" data-image="https://via.placeholder.com/600x400/ffff7f/ffffff">Italy</div>
-              <div class="menu-item" data-image="https://via.placeholder.com/600x400/ff7fff/ffffff">Japan</div>
+                <div class="menu-item active" data-image="images/back-1.png">Egypt</div>
+                <div class="menu-item" data-image="images/everest.jpeg">Himalayas</div>
+                <div class="menu-item" data-image="images/trekker-1.jpg">Tanzania</div>
+                <div class=" menu-item" data-image="https://via.placeholder.com/600x400/ffff7f/ffffff">Italy</div>
+                <div class="menu-item" data-image="https://via.placeholder.com/600x400/ff7fff/ffffff">Japan</div>
             </div>
-          </section>
+        </section>
 
 
 
@@ -201,11 +197,13 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
-                    <h3>About Us</h3>
+                    <h3>Pages</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Our Story</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Careers</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="trips.html">Treks</a></li>
+                        <li><a href="#">Guides</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -230,7 +228,7 @@
             </div>
         </div>
     </footer>
-
+    <script src="js/api.js"></script>
     <script src="js/utils/dom.js"></script>
     <script src="js/main.js"></script>
     <script src="js/data.js"></script>
@@ -238,4 +236,7 @@
     <script src="js/components/treks.js"></script>
     <script src="js/components/newsletter.js"></script>
 </body>
+
 </html>
+
+</div>

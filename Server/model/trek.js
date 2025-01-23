@@ -2,6 +2,17 @@
 
 const mongoose = require('mongoose');
 
+
+
+const reviewSchema = new mongoose.Schema({
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    rating: { type: Number, required: true, min: 1, max: 5 }, // Rating between 1 and 5
+    review: { type: String, required: true }, // Review text
+    createdAt: { type: Date, default: Date.now }
+});
+
+
+
 const trekDestinationSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -43,7 +54,12 @@ const trekDestinationSchema = new mongoose.Schema({
     totalDistance: {
         type: String,
         required: true
-    }
+    },
+
+    // New fields for reviews and ratings
+    reviews: [reviewSchema], // Array of reviews
+    averageRating: { type: Number, default: 0 } // Average rating, default to 0
+
 
 });
 

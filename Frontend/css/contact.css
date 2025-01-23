@@ -1,13 +1,14 @@
 /* General Reset */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    /* background-color: #f9f9f9; */
-    box-sizing: border-box;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background:url('../images/trekker-1.jpg') no-repeat center center/cover !important;
+  color: #333; /* Ensure text is readable */
+  box-sizing: border-box;
+}
  
+
   /* Left Section */
   .contact-section {
     position: relative;
@@ -40,6 +41,10 @@ body {
     min-width: 300px;
     max-width: 600px;
     color: black;
+    background-color: white;
+    padding-left: 30px;
+    padding-top: 10px;
+    border-radius: 10px;
   }
   
   .contact-left h4 {
