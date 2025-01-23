@@ -72,6 +72,7 @@ if (loginForm) {
             if (response.ok) {
                 // Store the token in localStorage
                 localStorage.setItem('token', result.token);
+                console.log(result.token);
                 alert('User Logged in successfully!');
                 window.location.href = '/index.html'; // Redirect to index page on success
             } else {
@@ -83,3 +84,30 @@ if (loginForm) {
         }
     });
 }
+
+// Log out API integration
+const logoutButton = document.getElementById('logoutButton');
+if (logoutButton) {
+    logoutButton.addEventListener('click', async function () {
+        try {
+            const response = await fetch('http://localhost:3000/api/user/logout', {
+                method: 'POST'
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                // Clear the token from localStorage
+                localStorage.removeItem('token');
+                alert(result.message); // "Logged out successfully"
+                window.location.href = '/index.html'; // Redirect to index page after logout
+            } else {
+                alert(`Error: ${result.message}`);
+            }
+        } catch (error) {
+            console.error('Error during logout:', error);
+            alert('An error occurred while logging out. Please try again later.');
+        }
+    });
+}
+
