@@ -127,3 +127,97 @@
     font-size: 14px;
     color: #555;
 }
+
+
+/* Reviews Section Styling */
+.reviews {
+    padding: 30px;
+    background-color: #f4f4f4;
+    border-radius: 12px;
+    margin: 20px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reviews h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Individual Review Card Styling */
+  .review {
+    display: flex;
+    align-items: flex-start;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .review:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Avatar Styling */
+  .review-avatar {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #555;
+    margin-right: 15px;
+  }
+  
+  /* Review Details Styling */
+  .review-details {
+    flex-grow: 1;
+  }
+  
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .review-user {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #007BFF;
+  }
+  
+  .review-rating {
+    display: flex;
+    align-items: center;
+  }
+  
+  .review-rating span {
+    font-size: 1.5rem;
+    color: #FFD700; /* Gold color for stars */
+    margin-right: 2px;
+  }
+  
+  .review-comment {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+  
+  /* No Reviews Message */
+  #reviews-list p {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    font-size: 1.2rem;
+  }
+  

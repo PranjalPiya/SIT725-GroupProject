@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function createTrekCard(trek) {
         return `
             <div class="trek-card" data-id="${trek.id}" onclick="goToTrekDetails(${trek.id})">
-            <div class="trek-card" data-id="${trek.id}" onclick="goToTrekDetails(${trek.id})">
                 <div class="trek-card-image">
                     <img src="${trek.image}" alt="${trek.title}">
                     <div class="difficulty-badge">${trek.difficulty}</div>
@@ -12,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="trek-card-content">
                     <h3 class="text-xl font-bold mb-2">${trek.title}</h3>
                     <div class="location">
-                        <img src="images/treeker-1.jpg" alt="Location">
+                        <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/map-pin.svg" alt="Location">
                         <span>${trek.location}</span>
                     </div>
                     <div class="trek-details">
@@ -47,8 +46,6 @@ function goToTrekDetails(trekId) {
 
 
 
-//  for specific trek destination details
-
 document.addEventListener('DOMContentLoaded', async function () {
     // Extract trek ID from the URL (corrected parameter name)
     const urlParams = new URLSearchParams(window.location.search);
@@ -61,16 +58,17 @@ document.addEventListener('DOMContentLoaded', async function () {
         return;
     }
 
+    console.log('anusha');
     // Fetch trek details using the trek ID
     try {
         const response = await fetch(`http://localhost:3000/api/treks/${trekId}`);
-
+        console.log(response);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} - ${response.statusText}`);
         }
 
         const trek = await response.json();
-
+        console.log(trek), 'saadsa';
         if (response.ok) {
             // Populate the HTML with trek details
             document.getElementById('trek-title').textContent = trek.name;
@@ -117,33 +115,44 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
 
 
-            const response = await fetch(`http://localhost:3000/api/treks/${trekId}`);
-            console.log(response);
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status} - ${response.statusText}`);
-            }
+//             const reviewResponse = await fetch(`http://localhost:3000/api/treks/${trekId}/reviews`);
+//             console.log(response);
+//             if (!reviewResponse.ok) {
+//                 throw new Error(`Error: ${reviewResponse.status} - ${reviewResponse.statusText}`);
+//             }
     
-            const re = await response.json();
+//             const reviews = await reviewResponse.json();
 
-            // If you want to add reviews dynamically
-            const reviewsList = document.getElementById('reviews-list');
+//             // If you want to add reviews dynamically
+//    // If you want to add reviews dynamically
+//             const reviewsList = document.getElementById('reviews-list');
 
-            // Check if there are reviews
-            if (re.comment) {
-                re.comment.forEach(review => {
-                    const reviewElement = document.createElement('div');
-                    reviewElement.classList.add('review');
-                    reviewElement.innerHTML = `
-                    // <p><strong>User:</strong> ${review.user.fullName}</p>
-                    <p><strong>Rating:</strong> ${review.rating}/5</p>
-                    <p>${review.comment}</p>
-                `;
-                    reviewsList.appendChild(reviewElement);
-                });
-            } else {
-                // If no reviews, display a message
-                reviewsList.innerHTML = `<p>No reviews at the moment.</p>`;
-            }
+//             // Check if there are reviews
+//             if (reviews && reviews.length > 0) {
+
+//                 reviews.forEach(review => {
+//                   const reviewElement = document.createElement('div');
+
+//                       // Safely access the user name
+//                     const userName = typeof review.userId === 'object' && review.userId !== null
+//                     ? review.userId.fullName || "Unknown User"
+//                     : review.userId || "Unknown User";
+
+
+//                   reviewElement.classList.add('review');
+//                   reviewElement.innerHTML = `
+//                     <div class="review-header">
+//                       <span class="review-user">${userName}</span>
+//                       <div class="review-rating">${generateStars(review.rating)}</div>
+//                     </div>
+//                     <br/>
+//                     <p class="review-comment">${review.comment}</p>
+//                   `;
+//                   reviewsList.appendChild(reviewElement);
+//                 });
+//               } else {
+//                 reviewsList.innerHTML = `<p>No reviews at the moment.</p>`;
+//               }
 
         }
     } catch (error) {
@@ -154,109 +163,75 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
 
+document.addEventListener('DOMContentLoaded', async function () {
+    // Extract trek ID from the URL (corrected parameter name)
+    const urlParams = new URLSearchParams(window.location.search);
+    const trekId = urlParams.get('id'); // Use 'id' instead of 'trekId'
 
-// document.addEventListener('DOMContentLoaded', async function () {
-//     // Extract trek ID from the URL (corrected parameter name)
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const trekId = urlParams.get('id'); // Use 'id' instead of 'trekId'
-//     // const
-//     console.log('trekId:', trekId); // Log trekId for debugging
+    console.log('trekId:', trekId); // Log trekId for debugging
 
-//     if (!trekId) {
-//         alert('Invalid Trek ID!');
-//         return;
-//     }
+    if (!trekId) {
+        alert('Invalid Trek ID!');
+        return;
+    }
 
-//     // Fetch trek details using the trek ID
-//     try {
+    console.log('anusha');
+    // Fetch trek details using the trek ID
+    try {
+        const response = await fetch(`http://localhost:3000/api/treks/${trekId}/reviews`);
+        console.log(response);
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
 
-//         // const response = await fetch(`http://localhost:3000/api/treks/${trekId}/my-reviews`, {
-//         //     method: 'POST',
-//         //     headers: {
-//         //         'Content-Type': 'application/json'
-//         //     },
-//         //     body: JSON.stringify(loginData)
-//         // });
+        const reviews = await response.json();
 
-//         const result = await response.json();
-//         const response = await fetch(`http://localhost:3000/api/treks/${trekId}/my-reviews`);
+        // console.log(trek), 'saadsa';
+        if (response.ok) {
 
-//         if (!response.ok) {
-//             throw new Error(`Error: ${response.status} - ${response.statusText}`);
-//         }
+            // If you want to add reviews dynamically
+   // If you want to add reviews dynamically
+            const reviewsList = document.getElementById('reviews-list');
 
-//         const trek = await response.json();
+            // Check if there are reviews
+            if (reviews && reviews.length > 0) {
 
-//         if (response.ok) {
-//             // Populate the HTML with trek details
-//             document.getElementById('trek-title').textContent = trek.name;
-//             document.getElementById('trek-name').textContent = trek.name;
-//             document.getElementById('trek-image').src = trek.images[0]; // Assuming the first image is used
-//             document.getElementById('trek-description').textContent = trek.description;
-//             document.getElementById('difficulty-level').textContent = trek.difficultyLevel;
-//             document.getElementById('total-days').textContent = trek.totalDays;
-//             document.getElementById('max-altitude').textContent = trek.maxAltitude;
-//             document.getElementById('best-season').textContent = trek.bestSeason;
-//             document.getElementById('total-distance').textContent = trek.totalDistance;
-//             document.getElementById('expenses').textContent = trek.expenses;
+                reviews.forEach(review => {
+                  const reviewElement = document.createElement('div');
 
-//             // Create all images in the slider dynamically
-//             const slider = document.getElementById('slider');
-//             trek.images.forEach((image, index) => {
-//                 const imgElement = document.createElement('img');
-//                 imgElement.src = image;
-//                 imgElement.classList.add('slide');
-//                 imgElement.dataset.index = index; // Add an index for navigation
-//                 slider.appendChild(imgElement);
-//             });
-
-//             // Initialize slider navigation
-//             let currentIndex = 0;
-//             const slides = slider.getElementsByClassName('slide');
-//             const totalSlides = slides.length;
-
-//             // Display the first image
-//             slides[currentIndex].style.display = 'block';
-
-//             // Handle the 'next' button click
-//             document.getElementById('next').addEventListener('click', () => {
-//                 slides[currentIndex].style.display = 'none'; // Hide current slide
-//                 currentIndex = (currentIndex + 1) % totalSlides; // Increment index, loop back if needed
-//                 slides[currentIndex].style.display = 'block'; // Show new slide
-//             });
-
-//             // Handle the 'prev' button click
-//             document.getElementById('prev').addEventListener('click', () => {
-//                 slides[currentIndex].style.display = 'none'; // Hide current slide
-//                 currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; // Decrement index, loop back if needed
-//                 slides[currentIndex].style.display = 'block'; // Show new slide
-//             });
+                      // Safely access the user name
+                    const userName = typeof review.userId === 'object' && review.userId !== null
+                    ? review.userId.fullName || "Unknown User"
+                    : review.userId || "Unknown User";
 
 
+                  reviewElement.classList.add('review');
+                  reviewElement.innerHTML = `
+                    <div class="review-header">
+                      <span class="review-user">${userName}</span>
+                      <div class="review-rating">${generateStars(review.rating)}</div>
+                    </div>
+                    <br/>
+                    <p class="review-comment">${review.comment}</p>
+                  `;
+                  reviewsList.appendChild(reviewElement);
+                });
+              } else {
+                reviewsList.innerHTML = `<p>No reviews at the moment.</p>`;
+              }
 
-//             // If you want to add reviews dynamically
-//             const reviewsList = document.getElementById('reviews-list');
+        }
+    } catch (error) {
+        console.error('Error fetching review details:', error);
+        alert('An error occurred while fetching review details.');
+    }
+});
 
-//             // Check if there are reviews
-//             if (trek.reviews && trek.reviews.length > 0) {
-//                 trek.reviews.forEach(review => {
-//                     const reviewElement = document.createElement('div');
-//                     reviewElement.classList.add('review');
-//                     reviewElement.innerHTML = `
-//                         <p><strong>User:</strong> ${review.user.fullName}</p>
-//                         <p><strong>Rating:</strong> ${review.rating}/5</p>
-//                         <p>${review.review}</p>
-//                     `;
-//                     reviewsList.appendChild(reviewElement);
-//                 });
-//             } else {
-//                 // If no reviews, display a message
-//                 reviewsList.innerHTML = `<p>No reviews at the moment.</p>`;
-//             }
-
-//         }
-//     } catch (error) {
-//         console.error('Error fetching trek details:', error);
-//         alert('An error occurred while fetching trek details.');
-//     }
-// });
+// Function to generate star ratings
+function generateStars(rating) {
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+      stars += i <= rating ? '<span>★</span>' : '<span>☆</span>';
+    }
+    return stars;
+}
