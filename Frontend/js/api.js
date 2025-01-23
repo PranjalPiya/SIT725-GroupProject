@@ -64,3 +64,36 @@ fetchTrekData().then(trekData => {
     }
 });
 
+
+
+// Slider functionality to enable Prev/Next sliding
+function initializeCarousel() {
+    const track = document.querySelector('.carousel-track');
+    const cards = Array.from(track.children);
+    const prevButton = document.getElementById('homepage_slider_prev');
+    const nextButton = document.getElementById('homepage_slider_next');
+    let currentIndex = 0;
+
+    const cardWidth = cards[0].getBoundingClientRect().width + 20; // Including margin-right
+
+    // Set the initial position of each card
+    cards.forEach((card, index) => {
+        card.style.left = cardWidth * index + 'px';
+    });
+
+    // Move to the next card
+    nextButton.addEventListener('click', () => {
+        if (currentIndex < cards.length - 1) {
+            currentIndex++;
+            track.style.transform = `translateX(-${cardWidth * currentIndex}px)`;
+        }
+    });
+
+    // Move to the previous card
+    prevButton.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            track.style.transform = `translateX(-${cardWidth * currentIndex}px)`;
+        }
+    });
+}
