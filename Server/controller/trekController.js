@@ -70,6 +70,11 @@ const getTrekDestinationById = async (req, res) => {
             select: 'fullName' // You can choose which user fields to include
         });
         ;
+        const trek = await TrekDestination.findById(req.params.id).populate({
+            path: 'reviews.user', // Populate the user field in reviews
+            select: 'fullName' // You can choose which user fields to include
+        });
+        ;
         if (!trek) {
             return res.status(404).json({ message: 'Trek destination not found' });
         }

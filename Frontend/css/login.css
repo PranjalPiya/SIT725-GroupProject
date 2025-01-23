@@ -78,7 +78,7 @@ body>* {
     margin-bottom: 25px;
     font-size: 30px;
     text-align: center;
-    color: var(--primary-color);
+    color: #5045E5;
 }
 
 .form-group {
@@ -110,7 +110,7 @@ body>* {
 .btn {
     width: 100%;
     padding: 14px;
-    background: var(--primary-color);
+    background: #5045E5;
     color: var(--secondary-color);
     border: none;
     border-radius: 8px;
@@ -121,7 +121,7 @@ body>* {
 }
 
 .btn:hover {
-    background: #45a049;
+    background:lightblue;
     transform: translateY(-2px);
 }
 
@@ -136,7 +136,7 @@ body>* {
 }
 
 .form-footer a {
-    color: var(--primary-color);
+    color: #5045E5;
     text-decoration: none;
     font-weight: bold;
 }
