@@ -152,6 +152,9 @@ const addReview = async (req, res) => {
             return res.status(404).json({ message: 'Trek destination not found' });
         }
 
+
+
+
         // Check if user has already submitted a review (Optional)
         const alreadyReviewed = trekDestination.reviews.find(r => r.user.toString() === req.user._id.toString());
         if (alreadyReviewed) {

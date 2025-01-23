@@ -15,24 +15,29 @@
 <body>
   <nav class="navbar">
     <div class="container">
-      <div class="nav-brand">
+      <div class="nav-brand" onclick="window.location.href = '/index.html'; ">
         <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg" alt="Logo" class="nav-logo">
         <span>TrekNepal</span>
       </div>
 
       <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="trips.html">Treks</a>
+        <a href="trips.html" class="active">Treks</a>
         <a href="#">Guides</a>
-        <a href="about.html" class="active">About</a>
+        <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </div>
 
-      <div class="nav-auth">
-        <button class="btn-login">Login</button>
-        <button class="btn-primary">Sign Up</button>
+      <div class="nav-auth" id="nav-auth">
+        <a href="login.html"> <button class="btn-login" style=" margin-right: 10px;">Login</button></a>
+        <a href="signup.html"> <button class="btn-primary">Sign Up</button></a>
       </div>
 
+      <!-- Profile section to display when the user is logged in -->
+      <div class="nav-profile" id="nav-profile" style="display: none;">
+        <a href="profile.html"><button class="btn-primary" style=" margin-right: 10px;">Profile</button></a>
+        <button id="logoutButton" class="btn-login">Logout</button>
+      </div>
       <button class="nav-toggle" id="navToggle">
         <span></span>
         <span></span>
@@ -93,6 +98,7 @@
     </div>
   </footer>
   <script src="js/trips.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

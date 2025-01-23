@@ -72,6 +72,8 @@ if (loginForm) {
             if (response.ok) {
                 // Store the token in localStorage
                 localStorage.setItem('token', result.token);
+                localStorage.setItem('userId', result.user._id);
+
                 console.log(result.token);
                 alert('User Logged in successfully!');
                 window.location.href = '/index.html'; // Redirect to index page on success

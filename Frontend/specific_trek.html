@@ -11,16 +11,19 @@
     <link rel="stylesheet" href="css/hero.css">
     <link rel="stylesheet" href="css/cards.css">
     <link rel="stylesheet" href="css/sections.css">
+    <link rel="stylesheet" href="css/guide-section.css">
 </head>
 
 <body>
     <nav class="navbar">
         <div class="container">
-            <div class="nav-brand" onclick="window.location.href='index.html'">
+            <div class="nav-brand" onclick="window.location.href = '/index.html'; ">
+
                 <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg" alt="Logo"
                     class="nav-logo">
                 <span>TrekNepal</span>
             </div>
+
 
             <div class="nav-links">
                 <a href="index.html" class="active">Home</a>
@@ -30,13 +33,19 @@
                 <a href="contact.html">Contact</a>
             </div>
 
-            <div class="nav-auth">
-                <a href="login.html"> <button class="btn-login">Login</button></a>
+            <div class="nav-auth" id="nav-auth">
+                <a href="login.html"> <button class="btn-login" style=" margin-right: 10px;">Login</button></a>
                 <a href="signup.html"> <button class="btn-primary">Sign Up</button></a>
             </div>
 
+            <!-- Profile section to display when the user is logged in -->
+            <div class="nav-profile" id="nav-profile" style="display: none;">
+                <a href="profile.html"><button class="btn-primary" style=" margin-right: 10px;">Profile</button></a>
+                <button id="logoutButton" class="btn-login">Logout</button>
+            </div>
         </div>
     </nav>
+
     <div class="container">
         <div class="header">
             <h1 id="trek-name"></h1>
@@ -68,10 +77,30 @@
                 target="_blank">View Trek Map</a>
         </div>
 
-        <div class="my_reviews" style="display: none;">
-            <h2>Your Review</h2>
-            <div id="personal_review"></div>
+
+        <div id="my-review"></div>
+        <!-- Add Review Form Template -->
+        <div id="reviewFormTemplate" style="display:none;">
+            <h3>Add Your Review</h3>
+            <form id="addReviewForm">
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating">
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="3">3 - Good</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="1">1 - Poor</option>
+                </select>
+                <br>
+                <label for="review">Review:</label>
+                <textarea id="review" name="review" rows="4" cols="50"
+                    placeholder="Write your review here..."></textarea>
+                <br>
+                <button type="submit">Submit Review</button>
+            </form>
         </div>
+
+
         <div class="reviews">
             <h2>Reviews</h2>
             <div id="reviews-list"></div>
@@ -111,6 +140,11 @@
         </div>
     </footer>
     <script src="./js/trek.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth_api.js"></script>
+
 </body>
 
 </html>
