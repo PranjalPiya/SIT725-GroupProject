@@ -47,7 +47,7 @@ function populateCarousel(trekData) {
                     <span><img src="images/mountain.png" alt="Altitude"> ${trek.maxAltitude}m |</span>
                     <span><img src="images/difficult.png" alt="Difficulty"> ${trek.difficultyLevel}</span>
                 </div>
-                <p>${trek.description.substring(0, 80)}...</p> <!-- Shorten description -->
+                <p>${trek.description.substring(0, 50)}...</p> <!-- Shorten description -->
                <button class="view-btn" onclick="window.location.href='specific_trek.html?id=${trek._id}'">View &rarr;</button>
 
           

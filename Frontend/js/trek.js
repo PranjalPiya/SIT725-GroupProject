@@ -127,10 +127,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                     const reviewElement = document.createElement('div');
                     reviewElement.classList.add('review');
                     reviewElement.innerHTML = `
-    <p><strong>User:</strong> ${review.user.fullName}</p>
-    <p><strong>Rating:</strong> ${review.rating}/5</p>
-    <p>${review.review}</p>
-`;
+                    <p><strong>User:</strong> ${review.user.fullName}</p>
+                    <p><strong>Rating:</strong> ${review.rating}/5</p>
+                    <p>${review.review}</p>
+                `;
                     reviewsList.appendChild(reviewElement);
                 });
             } else {
