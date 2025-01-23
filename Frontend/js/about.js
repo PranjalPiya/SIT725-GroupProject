@@ -7,18 +7,18 @@ const nextButton = document.querySelector('.nav-button.next');
 
 const data = [
   {
-    image: "https://via.placeholder.com/600x400?text=Island+Tour",
-    heading: "Island Tour",
+    image: "./images/everest.jpeg", // Relative path to the image
+    heading: "Everest Tour",
     description: "Explore the serene and beautiful islands with our exclusive tour packages."
   },
   {
-    image: "https://via.placeholder.com/600x400?text=Wildlife+Tour",
-    heading: "Wildlife Tour",
+    image: "./images/annapurna.jpeg",
+    heading: "Annapurna Tour",
     description: "Discover the exotic wildlife in its natural habitat."
   },
   {
-    image: "https://via.placeholder.com/600x400?text=Mountain+Biking",
-    heading: "Mountain Biking",
+    image: "./images/tilicho.jpg",
+    heading: "Tilicho",
     description: "Enjoy thrilling mountain biking adventures in breathtaking landscapes."
   }
 ];

@@ -1,106 +1,19 @@
-/* 
-.about-explore {
-    padding: 20px;
-    background-image: url('back-1.png');
-    background-size: cover;
-    background-position: center;
-  }
-
-  .about-adventure {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-    background-color: #1a1a4d;
-    color: white;
-  }
-
-  .about-menu {
-    flex: 1;
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .about-menu-item {
-    padding: 15px;
-    background: white;
-    color: black;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    text-align: center;
-    transition: background 0.3s;
-  }
-
-  .about-menu-item:hover, .menu-item.active {
-    background: #f3c300;
-  }
-
-  .about-display {
-    flex: 3;
-    position: relative;
-    padding-left: 20px;
-  }
-
-  .about-display img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-
-  .about-navigation-buttons {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-  }
-
-  .about-nav-button {
-    background: rgba(255, 215, 0, 0.8);
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .about-text-content {
-    text-align: center;
-    margin: 15px 0;
-  }
-
-  .about-text-content h3 {
-    margin: 10px 0;
-  }
-
-  .about-text-content p {
-    margin: 0;
-    color: #ccc;
-  } */
-
-
-
 .explore {
+  max-width: 1400px; /* Set maximum width */
+  margin: 0 auto; /* Center the section horizontally */
   padding: 20px;
   background-image: url('back-1.png');
   background-size: cover;
   background-position: center;
+  border-radius: 20px;
 }
+
 
 .adventure {
   display: flex;
   flex-wrap: wrap;
-  padding: 20px;
-  background-color: #1a1a4d;
+  padding: 50px;
+  background-color: #e2e2e2;
   color: white;
 }
 
@@ -115,17 +28,19 @@
 .menu-item {
   padding: 15px;
   background: white;
-  color: black;
+  color: white;
   border-radius: 5px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   text-align: center;
   transition: background 0.3s;
+  background-color: #4337CA;
 }
 
 .menu-item:hover, .menu-item.active {
   background: #f3c300;
+  /* background-color: #4337CA !important; */
 }
 
 .display {
@@ -135,9 +50,11 @@
 }
 
 .display img {
-  width: 100%;
+  padding-left: 20%;
+  width: 80%;
   height: auto;
   border-radius: 10px;
+  
 }
 
 .navigation-buttons {
@@ -150,7 +67,7 @@
 }
 
 .nav-button {
-  background: rgba(255, 215, 0, 0.8);
+  background: white;
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -170,11 +87,12 @@
 
 .text-content h3 {
   margin: 10px 0;
+  color: black;
 }
 
 .text-content p {
   margin: 0;
-  color: #ccc;
+  color: black;
 }
 
 /* Places to travel */
@@ -185,7 +103,7 @@
     align-items: center;
     justify-content: space-around;
     padding: 40px;
-    background-color: #efd8b7;
+    /* background-color: #efd8b7; */
   }
 
   .travel-image {
@@ -280,7 +198,7 @@
   .faq-menu-item {
     padding: 15px;
     background: #fff;
-    color: #3c0263;
+    color: #4337CA;
     border: 2px solid #3c0263;
     border-radius: 5px;
     font-weight: bold;
@@ -290,7 +208,7 @@
   }
 
   .faq-menu-item:hover, .faq-menu-item.active {
-    background: #3c0263;
+    background: #4337ca;
     color: #fff;
   }
 
