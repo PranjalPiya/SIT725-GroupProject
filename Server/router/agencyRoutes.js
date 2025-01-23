@@ -11,11 +11,13 @@ const { createAgency,
 const router = express.Router();
 
 router.route('/')
-.get(protect, getAgencies)
+.get(getAgencies);
+
+router.route('/')
 .post(protect, admin, createAgency);
 
 router.route('/:id')
-.get(protect, getAgencyById)
+.get(getAgencyById)
 .put(protect, admin, updateAgency)
 .delete(protect, admin, deleteAgency);
 
