@@ -6,7 +6,7 @@ const path = require('path');
 
 const userRoutes = require('./router/router'); // Import user routes
 const trekRoutes = require('./router/trekRouter');
-// const reviewRoutes = require('./router/reviewRouter');
+const agencyRoutes = require('./router/agencyRouter');
 
 app.use(express.json()); // Middleware to parse JSON bodies
 
@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, '../Frontend')));
 // Use the user routes for any requests to /api/user/
 app.use('/api/user', userRoutes);
 app.use('/api/treks', trekRoutes);
-// app.use('/api', reviewRoutes);
+app.use('/api/agencies', agencyRoutes);
 
 
 // Fallback to index.html for any other requests
