@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +15,7 @@
 <body>
   <nav class="navbar">
     <div class="container">
-      <div class="nav-brand" onclick="window.location.href = '/index.html'; ">
+      <div class="nav-brand">
         <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg" alt="Logo" class="nav-logo">
         <span>TrekNepal</span>
       </div>
@@ -26,26 +25,14 @@
         <a href="trips.html">Treks</a>
         <a href="guides.html">Guides</a>
         <a href="specific_agency.html">Agencies</a>
-        <a href="about.html" class="active">About</a>
-        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Contact</a>
       </div>
-
-      <div class="nav-auth" id="nav-auth">
-        <a href="login.html"> <button class="btn-login" style=" margin-right: 10px;">Login</button></a>
+      <div class="nav-auth">
+        <a href="login.html"> <button class="btn-login">Login</button></a>
         <a href="signup.html"> <button class="btn-primary">Sign Up</button></a>
       </div>
 
-      <!-- Profile section to display when the user is logged in -->
-      <div class="nav-profile" id="nav-profile" style="display: none;">
-        <a href="profile.html"><button class="btn-primary" style=" margin-right: 10px;">Profile</button></a>
-        <button id="logoutButton" class="btn-login">Logout</button>
-      </div>
-
-      <button class="nav-toggle" id="navToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
   </nav>
   <section class="contact-section">
@@ -57,21 +44,21 @@
           <i class="icon-location"></i>
           <div>
             <h5>Regional Office</h5>
-            <p>No: 58 A, East Madison Street, Baltimore, MD, USA 4508</p>
+            <p>Burwoord</p>
           </div>
         </div>
         <div class="info-item">
           <i class="icon-phone"></i>
           <div>
             <h5>Call Us</h5>
-            <p>+00 -123- 456-789</p>
+            <p>04123 566 789</p>
           </div>
         </div>
         <div class="info-item">
           <i class="icon-chat"></i>
           <div>
             <h5>Chat To Us</h5>
-            <p>Contact@example.com</p>
+            <p>admin@admin.com</p>
           </div>
         </div>
       </div>
@@ -83,48 +70,62 @@
         Leo duis ut diam quam nulla porttitor massa id. Dictum at tempor commodo
         ullamcorper. Sit amet cursus sit amet sit amet commodo dictum.
       </p>
-      <form class="contact-form">
+      <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+
         <div class="form-group">
           <label for="travel-date">Date To Travel</label>
-          <input type="date" id="travel-date">
+          <!-- Hidden input with access key -->
+          <input type="hidden" name="access_key" value="e6cf57f2-82b7-444c-98af-4574c0ebe444">
+          <!-- Added name attribute for travel date -->
+          <input type="date" id="travel-date" name="travel_date">
         </div>
+
         <div class="form-group">
           <label for="destination">Choose Place</label>
-          <select id="destination">
-            <option>Destinations</option>
-            <option>Paris</option>
-            <option>New York</option>
-            <option>Bali</option>
+          <!-- Added name attribute for destination -->
+          <select id="destination" name="destination">
+            <option value="" disabled selected>Destinations</option>
+            <option value="Paris">Annapurna Base Camp</option>
+            <option value="New York">Everest Base Camp</option>
+            <option value="Bali">Rara Lake</option>
           </select>
         </div>
+
         <div class="form-group">
           <label for="guests">No Of People To Travel</label>
-          <input type="number" id="guests" min="1" placeholder="Guests">
+          <!-- Added name attribute for number of guests -->
+          <input type="number" id="guests" name="number_of_guests" min="1" placeholder="Guests">
         </div>
+
         <div class="form-group">
           <label>Choose Category</label>
           <div class="checkbox-group">
-            <label><input type="checkbox"> Corporate</label>
-            <label><input type="checkbox"> Friends</label>
-            <label><input type="checkbox"> Family</label>
-            <label><input type="checkbox"> Couples</label>
-            <label><input type="checkbox"> Single</label>
-            <label><input type="checkbox"> Other</label>
+            <!-- Added name attribute for category with same name but different values -->
+            <label><input type="checkbox" name="category" value="Corporate"> Corporate</label>
+            <label><input type="checkbox" name="category" value="Friends"> Friends</label>
+            <label><input type="checkbox" name="category" value="Family"> Family</label>
+            <label><input type="checkbox" name="category" value="Couples"> Couples</label>
+            <label><input type="checkbox" name="category" value="Single"> Single</label>
+            <label><input type="checkbox" name="category" value="Other"> Other</label>
           </div>
         </div>
+
         <button type="submit" class="submit-btn">SUBMIT NOW</button>
       </form>
+
     </div>
   </section>
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-column">
-          <h3>About Us</h3>
+          <h3>Pages</h3>
           <ul class="footer-links">
-            <li><a href="#">Our Story</a></li>
-            <li><a href="#">Team</a></li>
-            <li><a href="#">Careers</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="trips.html">Treks</a></li>
+            <li><a href="#">Guides</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
         <div class="footer-column">
@@ -150,6 +151,5 @@
     </div>
   </footer>
 </body>
-<script src="js/main.js"></script>
 
 </html>

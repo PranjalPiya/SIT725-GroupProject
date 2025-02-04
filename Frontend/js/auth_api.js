@@ -96,24 +96,39 @@ if (loginForm) {
 const logoutButton = document.getElementById('logoutButton');
 if (logoutButton) {
     logoutButton.addEventListener('click', async function () {
+        // try {
+        //     const response = await fetch('http://localhost:3000/api/user/logout', {
+        //         method: 'POST'
+        //     });
+
+        //     const result = await response.json();
+
+        //     if (response.ok) {
+        //         // Clear the token from localStorage
+        //         localStorage.removeItem('token');
+        //         alert(result.message); // "Logged out successfully"
+        //         window.location.href = '/index.html'; // Redirect to index page after logout
+        //     } else {
+        //         alert(`Error: ${result.message}`);
+        //     }
+        // } catch (error) {
+        //     console.error('Error during logout:', error);
+        //     alert('An error occurred while logging out. Please try again later.');
+        // }
+
         try {
-            const response = await fetch('http://localhost:3000/api/user/logout', {
-                method: 'POST'
+            const response = await fetch('/api/user/logout', {
+                method: 'POST', // or GET if you prefer; just make sure it matches your route.
+                credentials: 'include'
             });
-
-            const result = await response.json();
-
             if (response.ok) {
-                // Clear the token from localStorage
-                localStorage.removeItem('token');
-                alert(result.message); // "Logged out successfully"
-                window.location.href = '/index.html'; // Redirect to index page after logout
+                // After logout, update the nav display or redirect to login page.
+                window.location.href = '/login.html';
             } else {
-                alert(`Error: ${result.message}`);
+                console.error('Logout failed.');
             }
         } catch (error) {
             console.error('Error during logout:', error);
-            alert('An error occurred while logging out. Please try again later.');
         }
     });
 }

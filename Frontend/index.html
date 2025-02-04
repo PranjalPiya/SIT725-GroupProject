@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>TrekNepal - Discover Your Next Adventure</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navbar.css">
@@ -55,13 +56,32 @@
             <div class="search-box">
                 <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/search.svg" alt="Search"
                     class="search-icon">
-                <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/search.svg" alt="Search"
-                    class="search-icon">
-                <input type="text" placeholder="Search for treks...">
-                <button class="btn-primary">Search</button>
+                <input type="text" id="searchInput" placeholder="Search for treks...">
+                <button id="searchButton" class="btn-primary">Search</button>
             </div>
         </div>
     </header>
+
+    <!-- Pop-up Search Modal -->
+    <div id="searchModal" class="search-modal">
+        <div class="search-modal-content">
+            <div class="search-modal-header">
+                <h2>Search Treks</h2>
+                <span id="closeModal" class="close-modal">&times;</span>
+            </div>
+            <div class="search-modal-body">
+
+                <input type="text" id="modalSearchInput" placeholder="Search for treks...">
+
+                <div id="modalSearchResults" class="search-results"></div>
+            </div>
+            <div class="search-modal-footer">
+                <!-- Add additional filters here if needed -->
+                <button id="modalSearchButton" class="btn-primary">Search</button>
+            </div>
+        </div>
+    </div>
+
 
     <main>
         <section class="featured-trek container">
@@ -78,14 +98,12 @@
                     </div>
                     <p>Experience the breathtaking beauty of the Swiss Alps on this incredible 10-day trek through
                         pristine mountain landscapes.</p>
-                    <p>Experience the breathtaking beauty of the Swiss Alps on this incredible 10-day trek through
-                        pristine mountain landscapes.</p>
+
                     <div class="trek-details">
                         <div class="detail">
                             <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/calendar.svg"
                                 alt="Duration">
-                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/calendar.svg"
-                                alt="Duration">
+
                             <span>10 days</span>
                         </div>
                         <div class="detail">
@@ -93,8 +111,7 @@
                             <span>8 spots left</span>
                         </div>
                         <div class="detail">
-                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg"
-                                alt="Difficulty">
+
                             <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg"
                                 alt="Difficulty">
                             <span>Moderate</span>
@@ -251,6 +268,8 @@
     <script src="js/data.js"></script>
     <script src="js/api.js"></script>
     <script src="js/auth_api.js"></script>
+    <script src="js/search.js"></script>
+
 </body>
 
 

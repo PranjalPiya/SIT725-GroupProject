@@ -1,27 +1,70 @@
 document.addEventListener('DOMContentLoaded', function () {
   // 1. Token-based navigation logic
-  function handleTokenBasedNavigation() {
-    const token = localStorage.getItem('token');
-    console.log(`token: ${token}`); // Debugging line to ensure token is retrieved
 
-    // Select the nav-auth and nav-profile sections
-    const navAuth = document.getElementById('nav-auth');
-    const navProfile = document.getElementById('nav-profile');
+  async function handleTokenBasedNavigation() {
 
-    // Check if both elements exist before trying to manipulate their display
-    if (navAuth && navProfile) {
-      if (token) {
-        // If token exists, show profile/logout section and hide login/signup section
-        navAuth.style.display = 'none';
-        navProfile.style.display = 'block';
+    try {
+      // Make a call to the user status endpoint.
+      const response = await fetch('/api/user/me', {
+        method: 'GET',
+        credentials: 'include', // Ensures cookies (JWT cookie) are sent along with the request.
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const navAuth = document.getElementById('nav-auth');
+      const navProfile = document.getElementById('nav-profile');
+
+      if (response.ok) {
+        // User is logged in (token valid). You could use the returned user info if needed.
+        const data = await response.json();
+        console.log('User data:', data);
+
+        // Show profile and logout buttons
+        if (navAuth && navProfile) {
+          navAuth.style.display = 'none';
+          navProfile.style.display = 'block';
+        }
       } else {
-        // If no token, show login/signup and hide profile/logout
+        // No valid token found, so display login/signup buttons.
+        if (navAuth && navProfile) {
+          navAuth.style.display = 'block';
+          navProfile.style.display = 'none';
+        }
+      }
+    } catch (error) {
+      console.error('Error checking user status:', error);
+      // On error, default to showing login/signup
+      const navAuth = document.getElementById('nav-auth');
+      const navProfile = document.getElementById('nav-profile');
+      if (navAuth && navProfile) {
         navAuth.style.display = 'block';
         navProfile.style.display = 'none';
       }
-    } else {
-      console.error('nav-auth or nav-profile elements are not found.');
     }
+
+    //   const token = localStorage.getItem('token');
+    //   console.log(`token: ${token}`); // Debugging line to ensure token is retrieved
+
+    //   // Select the nav-auth and nav-profile sections
+    //   const navAuth = document.getElementById('nav-auth');
+    //   const navProfile = document.getElementById('nav-profile');
+
+    //   // Check if both elements exist before trying to manipulate their display
+    //   if (navAuth && navProfile) {
+    //     if (token) {
+    //       // If token exists, show profile/logout section and hide login/signup section
+    //       navAuth.style.display = 'none';
+    //       navProfile.style.display = 'block';
+    //     } else {
+    //       // If no token, show login/signup and hide profile/logout
+    //       navAuth.style.display = 'block';
+    //       navProfile.style.display = 'none';
+    //     }
+    //   } else {
+    //     console.error('nav-auth or nav-profile elements are not found.');
+    //   }
   }
 
   // 2. Carousel logic
@@ -66,3 +109,56 @@ document.addEventListener('DOMContentLoaded', function () {
   handleTokenBasedNavigation();
   initCarousel();
 });
+
+
+
+
+
+
+
+// document.addEventListener('DOMContentLoaded', function () {
+//   async function checkUserStatus() {
+//     try {
+//       // Make a call to the user status endpoint.
+//       const response = await fetch('/api/user/me', {
+//         method: 'GET',
+//         credentials: 'include', // Ensures cookies (JWT cookie) are sent along with the request.
+//         headers: {
+//           'Content-Type': 'application/json'
+//         }
+//       });
+
+//       const navAuth = document.getElementById('nav-auth');
+//       const navProfile = document.getElementById('nav-profile');
+
+//       if (response.ok) {
+//         // User is logged in (token valid). You could use the returned user info if needed.
+//         const data = await response.json();
+//         console.log('User data:', data);
+
+//         // Show profile and logout buttons
+//         if (navAuth && navProfile) {
+//           navAuth.style.display = 'none';
+//           navProfile.style.display = 'block';
+//         }
+//       } else {
+//         // No valid token found, so display login/signup buttons.
+//         if (navAuth && navProfile) {
+//           navAuth.style.display = 'block';
+//           navProfile.style.display = 'none';
+//         }
+//       }
+//     } catch (error) {
+//       console.error('Error checking user status:', error);
+//       // On error, default to showing login/signup
+//       const navAuth = document.getElementById('nav-auth');
+//       const navProfile = document.getElementById('nav-profile');
+//       if (navAuth && navProfile) {
+//         navAuth.style.display = 'block';
+//         navProfile.style.display = 'none';
+//       }
+//     }
+//   }
+
+//   checkUserStatus();
+// });
