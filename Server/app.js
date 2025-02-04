@@ -43,6 +43,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 
 const app = express();
+const path = require('path');
 
 // Middleware to parse JSON bodies and URL-encoded data
 app.use(express.json());
