@@ -12,10 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
           'Content-Type': 'application/json'
         }
       });
-
       const navAuth = document.getElementById('nav-auth');
       const navProfile = document.getElementById('nav-profile');
-
       if (response.ok) {
         // User is logged in (token valid). You could use the returned user info if needed.
         const data = await response.json();

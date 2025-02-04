@@ -20,12 +20,12 @@ const createBooking = asyncHandler(async (req, res) => {
   // Validate dates
   const start = new Date(startDate);
   const end = new Date(endDate);
-  
+
   if (start < new Date()) {
     res.status(400);
     throw new Error('Start date cannot be in the past');
   }
-  
+
   if (end <= start) {
     res.status(400);
     throw new Error('End date must be after start date');
@@ -93,7 +93,7 @@ const getMyBookings = asyncHandler(async (req, res) => {
     .populate('guideId', 'name phone')
     .populate('trekId', 'name description')
     .sort('-createdAt');
-  
+
   res.json(bookings);
 });
 
@@ -106,7 +106,7 @@ const getAgencyBookings = asyncHandler(async (req, res) => {
     .populate('guideId', 'name phone')
     .populate('trekId', 'name description')
     .sort('-createdAt');
-  
+
   res.json(bookings);
 });
 
@@ -146,7 +146,7 @@ const cancelBooking = asyncHandler(async (req, res) => {
 
   // Only booking user or agency can cancel
   if (booking.userId.toString() !== req.user._id.toString() &&
-      booking.agencyId.toString() !== req.agency?._id.toString()) {
+    booking.agencyId.toString() !== req.agency?._id.toString()) {
     res.status(403);
     throw new Error('Not authorized');
   }
