@@ -69,7 +69,7 @@ const getTrekDestinationById = async (req, res) => {
             path: 'reviews.user', // Populate the user field in reviews
             select: 'fullName' // You can choose which user fields to include
         });
-        ;
+
         if (!trek) {
             return res.status(404).json({ message: 'Trek destination not found' });
         }
@@ -180,4 +180,112 @@ const addReview = async (req, res) => {
 };
 
 
-module.exports = { createTrekDestination, getAllTrekDestinations, getTrekDestinationById, searchTrekDestinations, addReview };
+
+const getUserReviewForTrek = async (req, res) => {
+    try {
+        const trekDestination = await TrekDestination.findById(req.params.id);
+
+        if (!trekDestination) {
+            return res.status(404).json({ message: 'Trek destination not found' });
+        }
+
+        // Find the review by the current user
+        const userReview = trekDestination.reviews.find(
+            (review) => review.user.toString() === req.user._id.toString()
+        );
+
+        if (!userReview) {
+            return res.status(404).json({ message: 'No review found for this user on this trek destination' });
+        }
+
+        res.status(200).json(userReview);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
+// trekController.js
+
+const updateUserReview = async (req, res) => {
+    try {
+        const trekDestination = await TrekDestination.findById(req.params.id);
+
+        if (!trekDestination) {
+            return res.status(404).json({ message: 'Trek destination not found' });
+        }
+
+        // Find the review by the current user
+        const userReview = trekDestination.reviews.find(
+            (review) => review.user.toString() === req.user._id.toString()
+        );
+
+        if (!userReview) {
+            return res.status(404).json({ message: 'No review found for this user on this trek destination' });
+        }
+
+        // Update the review and rating fields if they exist in the request body
+        if (req.body.rating) {
+            userReview.rating = req.body.rating;
+        }
+        if (req.body.review) {
+            userReview.review = req.body.review;
+        }
+
+        // Recalculate the average rating after the update
+        trekDestination.averageRating = trekDestination.reviews.reduce(
+            (acc, item) => item.rating + acc,
+            0
+        ) / trekDestination.reviews.length;
+
+        // Save the updated trek destination
+        await trekDestination.save();
+
+        res.status(200).json({ message: 'Review updated successfully', trekDestination });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// trekController.js
+
+const deleteUserReview = async (req, res) => {
+    try {
+        const trekDestination = await TrekDestination.findById(req.params.id);
+
+        if (!trekDestination) {
+            return res.status(404).json({ message: 'Trek destination not found' });
+        }
+
+        // Find the index of the review by the current user
+        const reviewIndex = trekDestination.reviews.findIndex(
+            (review) => review.user.toString() === req.user._id.toString()
+        );
+
+        if (reviewIndex === -1) {
+            return res.status(404).json({ message: 'No review found for this user on this trek destination' });
+        }
+
+        // Remove the review from the reviews array
+        trekDestination.reviews.splice(reviewIndex, 1);
+
+        // Recalculate the average rating after deletion
+        trekDestination.averageRating = trekDestination.reviews.length
+            ? trekDestination.reviews.reduce((acc, item) => item.rating + acc, 0) / trekDestination.reviews.length
+            : 0;
+
+        // Save the updated trek destination
+        await trekDestination.save();
+
+        res.status(200).json({ message: 'Review deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
+
+module.exports = { getUserReviewForTrek, updateUserReview, deleteUserReview, createTrekDestination, getAllTrekDestinations, getTrekDestinationById, searchTrekDestinations, addReview };

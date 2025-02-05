@@ -15,27 +15,36 @@
 <body>
   <nav class="navbar">
     <div class="container">
-        <div class="nav-brand">
-            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg" alt="Logo"
-                class="nav-logo">
-            <span>TrekNepal</span>
-        </div>
+      <div class="nav-brand" onclick="window.location.href = '/index.html'; ">
+        <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/mountain.svg" alt="Logo" class="nav-logo">
+        <span>TrekNepal</span>
+      </div>
 
-        <div class="nav-links">
-            <a href="index.html" class="active">Home</a>
-            <a href="trips.html">Treks</a>
-            <a href="guides.html">Guides</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-        </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="trips.html" class="active">Treks</a>
+        <a href="guides.html">Guides</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
 
-        <div class="nav-auth">
-            <a href="login.html"> <button class="btn-login">Login</button></a>
-            <a href="signup.html"> <button class="btn-primary">Sign Up</button></a>
-        </div>
+      <div class="nav-auth" id="nav-auth">
+        <a href="login.html"> <button class="btn-login" style=" margin-right: 10px;">Login</button></a>
+        <a href="signup.html"> <button class="btn-primary">Sign Up</button></a>
+      </div>
 
+      <!-- Profile section to display when the user is logged in -->
+      <div class="nav-profile" id="nav-profile" style="display: none;">
+        <a href="profile.html"><button class="btn-primary" style=" margin-right: 10px;">Profile</button></a>
+        <button id="logoutButton" class="btn-login">Logout</button>
+      </div>
+      <button class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-</nav>
+  </nav>
   <section id="travel-section">
     <div class="section-header">
       <h2>Explore Top Destinations</h2>
@@ -54,42 +63,42 @@
     <div id="travel-cards" class="cards-container"></div>
     <div id="pagination" class="pagination-container"></div>
   </section>
+
   <footer class="footer">
     <div class="container">
-        <div class="footer-grid">
-            <div class="footer-column">
-                <h3>Pages</h3>
-                <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="trips.html">Treks</a></li>
-                    <li><a href="#">Guides</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Support</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Safety</a></li>
-                    <li><a href="#">Cancellation</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Legal</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Terms</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
-                </ul>
-            </div>
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h3>About Us</h3>
+          <ul class="footer-links">
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 TrekNepal. All rights reserved.</p>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul class="footer-links">
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Safety</a></li>
+            <li><a href="#">Cancellation</a></li>
+          </ul>
         </div>
+        <div class="footer-column">
+          <h3>Legal</h3>
+          <ul class="footer-links">
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 TrekNepal. All rights reserved.</p>
+      </div>
     </div>
-</footer>
+  </footer>
   <script src="js/trips.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>
