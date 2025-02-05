@@ -110,6 +110,18 @@ const getAgencyBookings = asyncHandler(async (req, res) => {
   res.json(bookings);
 });
 
+// @desc    Get all bookings (for admin)
+// @route   GET /api/bookings/all
+// @access  Private/Admin
+const getAllBookings = asyncHandler(async (req, res) => {
+  const bookings = await Booking.find()
+    .populate('userId', 'name email')      // Populate user details
+    .populate('trekId', 'name description')  // Populate trek details
+    .populate('agencyId', 'name')           // Populate agency details
+    .sort('-createdAt');
+  res.status(200).json(bookings);
+});
+
 // @desc    Update booking status
 // @route   PUT /api/bookings/:id/status
 // @access  Private/Agency
@@ -166,10 +178,36 @@ const cancelBooking = asyncHandler(async (req, res) => {
   res.json(updatedBooking);
 });
 
+
+
+
+
+// @desc    Delete a booking
+// @route   DELETE /api/bookings/:id
+// @access  Private/Admin
+const deleteBooking = asyncHandler(async (req, res) => {
+  const booking = await Booking.findByIdAndDelete(req.params.id);
+  if (!booking) {
+    res.status(404);
+    throw new Error('Booking not found');
+  }
+  res.status(200).json({ message: 'Booking deleted successfully' });
+});
+
+
+
+
+
+
+
+
+
 module.exports = {
   createBooking,
   getMyBookings,
   getAgencyBookings,
   updateBookingStatus,
   cancelBooking,
+  getAllBookings,
+  deleteBooking,
 };

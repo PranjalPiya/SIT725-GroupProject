@@ -33,7 +33,7 @@ const bookingSchema = new mongoose.Schema({
   },
   trekId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Trek',
+    ref: 'TrekDestination',
     required: true
   },
   startDate: {

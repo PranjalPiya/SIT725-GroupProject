@@ -42,13 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         const urlParams = new URLSearchParams(window.location.search);
-        // const trekId = urlParams.get('id'); // Use 'id' instead of 'trekId'
-        // console.log('trekIdk ho booking page ma pugesi:', trekId); // Log trekId for debugging
 
-        // if (!trekId) {
-        //     alert('Invalid Trek ID!');
-        //     return;
-        // }
         const fullName = document.getElementById('fullName').value;
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
@@ -64,11 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (!token) {
-            bookingStatus.textContent = 'Authentication token missing.';
-            bookingStatus.classList.add('error');
-            return;
-        }
+
 
         const trekId = new URLSearchParams(window.location.search).get('id');
         const bookingData = {

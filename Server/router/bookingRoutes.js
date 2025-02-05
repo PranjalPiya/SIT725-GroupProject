@@ -7,6 +7,8 @@ const {
   getAgencyBookings,
   updateBookingStatus,
   cancelBooking,
+  getAllBookings,
+  deleteBooking,
 } = require('../controller/bookingController');
 
 const router = express.Router();
@@ -25,5 +27,11 @@ router.route('/agency')
 
 router.route('/:id/cancel')
   .put(protect, cancelBooking);
+
+// Get all bookings (admin view)
+router.route('/all').get(protect, admin, getAllBookings);
+
+// Delete a booking (admin view)
+router.route('/:id').delete(protect, admin, deleteBooking);
 
 module.exports = router;

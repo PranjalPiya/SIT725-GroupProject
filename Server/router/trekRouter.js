@@ -1,5 +1,6 @@
 const express = require('express');
-const { getUserReviewForTrek, updateUserReview, deleteUserReview, createTrekDestination, getAllTrekDestinations, getTrekDestinationById, searchTrekDestinations, addReview } = require('../controller/trekController');
+const { updateTrekDestination,
+    deleteTrekDestination, getUserReviewForTrek, updateUserReview, deleteUserReview, createTrekDestination, getAllTrekDestinations, getTrekDestinationById, searchTrekDestinations, addReview } = require('../controller/trekController');
 const { protect, admin } = require('../middleware/authMiddleware');
 
 const router = express.Router();
@@ -10,6 +11,15 @@ router.post('/create', protect, admin, createTrekDestination);
 
 // Route to get all trek destinations
 router.get('/', getAllTrekDestinations);
+
+// Update a Trek Destination (for admin)
+router.put('/:id', protect, admin, updateTrekDestination);
+
+// Delete a Trek Destination (for admin)
+router.delete('/:id', protect, admin, deleteTrekDestination);
+
+
+
 // Search trek destinations route
 router.get('/search', searchTrekDestinations);
 

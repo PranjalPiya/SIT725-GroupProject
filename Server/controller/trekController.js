@@ -79,6 +79,97 @@ const getTrekDestinationById = async (req, res) => {
     }
 };
 
+
+
+
+// Update Trek Destination
+const updateTrekDestination = async (req, res) => {
+    const trekId = req.params.id;
+    const {
+        name,
+        images,
+        description,
+        totalDays,
+        expenses,
+        difficultyLevel,
+        maxAltitude,
+        bestSeason,
+        trekMap,
+        totalDistance,
+    } = req.body;
+    try {
+        if (
+            !name ||
+            !images ||
+            !description ||
+            !totalDays ||
+            !expenses ||
+            !difficultyLevel ||
+            !maxAltitude ||
+            !bestSeason ||
+            !trekMap ||
+            !totalDistance
+        ) {
+            return res.status(400).json({ message: 'Missing required fields' });
+        }
+        const updatedTrek = await TrekDestination.findByIdAndUpdate(
+            trekId,
+            {
+                name,
+                images,
+                description,
+                totalDays,
+                expenses,
+                difficultyLevel,
+                maxAltitude,
+                bestSeason,
+                trekMap,
+                totalDistance,
+            },
+            { new: true }
+        );
+        if (!updatedTrek) {
+            return res.status(404).json({ message: 'Trek destination not found' });
+        }
+        res.status(200).json({
+            message: 'Trek destination updated successfully',
+            trek: updatedTrek,
+        });
+    } catch (error) {
+        res
+            .status(500)
+            .json({ message: 'Error updating trek destination', error: error.message });
+    }
+};
+
+// Delete Trek Destination
+const deleteTrekDestination = async (req, res) => {
+    const trekId = req.params.id;
+    try {
+        const deletedTrek = await TrekDestination.findByIdAndDelete(trekId);
+        if (!deletedTrek) {
+            return res.status(404).json({ message: 'Trek destination not found' });
+        }
+        res.status(200).json({
+            message: 'Trek destination deleted successfully',
+            trek: deletedTrek,
+        });
+    } catch (error) {
+        res
+            .status(500)
+            .json({ message: 'Error deleting trek destination', error: error.message });
+    }
+};
+
+
+
+
+
+
+
+
+
+
 // Search Trek Destinations with filtering and sorting
 const searchTrekDestinations = async (req, res) => {
     try {
@@ -288,4 +379,7 @@ const deleteUserReview = async (req, res) => {
 
 
 
-module.exports = { getUserReviewForTrek, updateUserReview, deleteUserReview, createTrekDestination, getAllTrekDestinations, getTrekDestinationById, searchTrekDestinations, addReview };
+module.exports = {
+    updateTrekDestination,
+    deleteTrekDestination, getUserReviewForTrek, updateUserReview, deleteUserReview, createTrekDestination, getAllTrekDestinations, getTrekDestinationById, searchTrekDestinations, addReview
+};

@@ -106,7 +106,13 @@ if (loginForm) {
                     });;
                 }
             } else {
-                alert(`Error: ${result.message}`);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: result.message,
+                    showConfirmButton: false,
+                    timer: 900
+                })
             }
         } catch (error) {
             console.error('Error during login:', error);
