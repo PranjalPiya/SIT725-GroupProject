@@ -33,8 +33,16 @@ if (signupForm) {
             const result = await response.json();
 
             if (response.ok) {
-                alert('User registered successfully!');
-                window.location.href = '/login.html'; // Redirect to login page on success
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "User Created Successfully!",
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    // Redirect to login page after user clicks OK.
+                    window.location.href = '/login.html';
+                });;
             } else {
                 alert(`Error: ${result.message}`);
             }
@@ -70,17 +78,32 @@ if (loginForm) {
             const result = await response.json();
 
             if (response.ok) {
-
-                // Store the token in localStorage
-                localStorage.setItem('token', result.token);
-                console.log(result.token);
                 if (result.user.role == 'admin') {
-                    alert('Admin Logged in successfully!');
-                    window.location.href = '/dashboard.html';
+                    // alert('Admin Logged in successfully!');
+                    // window.location.href = '/dashboard.html';
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Admin Logged In Successfully!",
+                        showConfirmButton: false,
+                        timer: 800
+                    }).then(() => {
+                        // Redirect to login page after user clicks OK.
+                        window.location.href = '/dashboard.html';
+                    });;
                 } else {
-                    alert('User Logged in successfully!');
-                    window.location.href = '/index.html'; // Redirect to index page on success
-
+                    // alert('User Logged in successfully!');
+                    // window.location.href = '/index.html'; // Redirect to index page on success
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Logged In Successfully!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        // Redirect to login page after user clicks OK.
+                        window.location.href = '/index.html';
+                    });;
                 }
             } else {
                 alert(`Error: ${result.message}`);
@@ -96,26 +119,6 @@ if (loginForm) {
 const logoutButton = document.getElementById('logoutButton');
 if (logoutButton) {
     logoutButton.addEventListener('click', async function () {
-        // try {
-        //     const response = await fetch('http://localhost:3000/api/user/logout', {
-        //         method: 'POST'
-        //     });
-
-        //     const result = await response.json();
-
-        //     if (response.ok) {
-        //         // Clear the token from localStorage
-        //         localStorage.removeItem('token');
-        //         alert(result.message); // "Logged out successfully"
-        //         window.location.href = '/index.html'; // Redirect to index page after logout
-        //     } else {
-        //         alert(`Error: ${result.message}`);
-        //     }
-        // } catch (error) {
-        //     console.error('Error during logout:', error);
-        //     alert('An error occurred while logging out. Please try again later.');
-        // }
-
         try {
             const response = await fetch('/api/user/logout', {
                 method: 'POST', // or GET if you prefer; just make sure it matches your route.

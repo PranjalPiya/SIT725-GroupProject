@@ -158,6 +158,7 @@ const login = async (req, res) => {
             phone: user.phone,
             email: user.email,
             gender: user.gender,
+            role: user.role,
             // include other non-sensitive fields if needed
         };
 

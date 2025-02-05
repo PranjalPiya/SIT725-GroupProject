@@ -60,12 +60,13 @@ app.use(express.static(path.join(__dirname, '../Frontend')));
 // Importing route files
 const userRoutes = require('./router/router'); // User routes
 const trekRoutes = require('./router/trekRouter'); // Trek related routes
-const agencyRoutes = require('./router/agencyRouter'); // Agency related routes
-
+const agencyRoutes = require('./router/agencyRoutes'); // Agency related routes
+const bookingRoutes = require('./router/bookingRoutes'); //
 // Mount routes with base paths
 app.use('/api/user', userRoutes);
 app.use('/api/treks', trekRoutes);
 app.use('/api/agencies', agencyRoutes);
+app.use('/api/bookings', bookingRoutes)
 
 // Fallback to index.html for any other requests (good for SPA routing)
 app.get('*', (req, res) => {

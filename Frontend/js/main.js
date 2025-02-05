@@ -42,27 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    //   const token = localStorage.getItem('token');
-    //   console.log(`token: ${token}`); // Debugging line to ensure token is retrieved
 
-    //   // Select the nav-auth and nav-profile sections
-    //   const navAuth = document.getElementById('nav-auth');
-    //   const navProfile = document.getElementById('nav-profile');
-
-    //   // Check if both elements exist before trying to manipulate their display
-    //   if (navAuth && navProfile) {
-    //     if (token) {
-    //       // If token exists, show profile/logout section and hide login/signup section
-    //       navAuth.style.display = 'none';
-    //       navProfile.style.display = 'block';
-    //     } else {
-    //       // If no token, show login/signup and hide profile/logout
-    //       navAuth.style.display = 'block';
-    //       navProfile.style.display = 'none';
-    //     }
-    //   } else {
-    //     console.error('nav-auth or nav-profile elements are not found.');
-    //   }
   }
 
   // 2. Carousel logic

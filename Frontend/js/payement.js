@@ -10,19 +10,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Get the bookingId from the URL
     const bookingId = new URLSearchParams(window.location.search).get('bookingId');
-    
+
     // Handle the form submission
     paymentForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const token = localStorage.getItem('token');
 
         // Fetch the client secret from the server
         const response = await fetch('http://localhost:3000/api/payements/confirm-payement', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Content-Type': 'application/json'
+
             },
+            // Include credentials to ensure cookies are sent with the request
+            credentials: 'include',
             body: JSON.stringify({ bookingId: bookingId }),
         });
 
@@ -48,9 +49,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             const updateResponse = await fetch(`http://localhost:3000/api/payements/${bookingId}/confirm-payement`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json'
+
                 },
+                // Include credentials to ensure cookies are sent with the request
+                credentials: 'include',
                 body: JSON.stringify({ transactionId: paymentIntent.id }),
             });
 

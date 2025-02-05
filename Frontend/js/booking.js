@@ -41,6 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
     bookingForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
+        const urlParams = new URLSearchParams(window.location.search);
+        // const trekId = urlParams.get('id'); // Use 'id' instead of 'trekId'
+        // console.log('trekIdk ho booking page ma pugesi:', trekId); // Log trekId for debugging
+
+        // if (!trekId) {
+        //     alert('Invalid Trek ID!');
+        //     return;
+        // }
         const fullName = document.getElementById('fullName').value;
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
@@ -75,12 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const response = await fetch(`http://localhost:3000/api/bookings`, {
+            const response = await fetch(`http://localhost:3000/api/bookings/create`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type': 'application/json'
+
                 },
+                // Include credentials to ensure cookies are sent with the request
+                credentials: 'include',
                 body: JSON.stringify(bookingData)
             });
 
@@ -88,9 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const responseData = await response.json();
 
             if (response.ok) {
-          // Extract the booking ID from the response
+                // Extract the booking ID from the response
                 const bookingId = responseData._id;  // Assuming the response contains the _id
-console.log(bookingId, responseData)
+                console.log(bookingId, responseData)
                 // Redirect to payment page
                 window.location.href = `payement.html?bookingId=${bookingId}`;
             } else {

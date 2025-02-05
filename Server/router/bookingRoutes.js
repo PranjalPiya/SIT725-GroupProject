@@ -1,7 +1,7 @@
 const express = require('express');
 const { protect, admin } = require('../middleware/authMiddleware');
 
-const { 
+const {
   createBooking,
   getMyBookings,
   getAgencyBookings,
@@ -11,14 +11,14 @@ const {
 
 const router = express.Router();
 
-router.route('/')
+router.route('/create')
   .post(protect, createBooking);
 
 router.route('/my')
   .get(protect, getMyBookings);
 
 router.route('/agency')
-  .get(protect, agency, getAgencyBookings);
+  .get(protect, getAgencyBookings);
 
 // router.route('/:id/status')
 //   .put(protect, agency, updateBookingStatus);
