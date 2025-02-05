@@ -258,7 +258,7 @@ function populateBookingsList(bookings) {
         const agency = booking.agencyId;
         const tr = document.createElement("tr");
         tr.innerHTML = `
-        <td>${user ? user.name : "N/A"}</td>
+        <td>${user ? user.fullName : "N/A"}</td>
         <td>${user ? user.email : "N/A"}</td>
         <td>${trek ? trek.name : "N/A"}</td>
         <td>${agency ? agency.name : "N/A"}</td>
@@ -307,10 +307,85 @@ async function deleteBooking(bookingId) {
     }
 }
 
+// -----FOr All users ---------------------------------- ----- //
+
+// Fetch all users from the API
+async function fetchAllUsers() {
+    try {
+        const response = await fetch("http://localhost:3000/api/user/all", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+        });
+        if (response.ok) {
+            const users = await response.json();
+            populateUsersList(users);
+        } else {
+            console.error("Error fetching users");
+        }
+    } catch (error) {
+        console.error("Error fetching users:", error);
+    }
+}
+
+// Populate the users table with details
+function populateUsersList(users) {
+    const usersListBody = document.getElementById("usersListBody");
+    usersListBody.innerHTML = ""; // Clear existing rows
+    users.forEach((user) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+        <td>${user.fullName}</td>
+        <td>${user.email}</td>
+        <td>${user.phone}</td>
+        <td>${user.gender}</td>
+        <td>${user.role || "user"}</td>
+        <td>
+          <button class="action-btn delete-btn" onclick="deleteUser('${user._id}')">
+            Delete
+          </button>
+        </td>
+      `;
+        usersListBody.appendChild(tr);
+    });
+}
+
+// Delete a user using the DELETE API
+async function deleteUser(userId) {
+    const confirmResult = await Swal.fire({
+        title: "Confirm Deletion",
+        text: "Are you sure you want to delete this user?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+    });
+
+    if (confirmResult.isConfirmed) {
+        try {
+            const response = await fetch(`http://localhost:3000/api/user/${userId}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+            });
+            if (response.ok) {
+                Swal.fire("Deleted", "User deleted successfully", "success");
+                fetchAllUsers(); // Refresh the list after deletion
+            } else {
+                const errorResult = await response.json();
+                Swal.fire("Error", errorResult.message || "Error deleting user", "error");
+            }
+        } catch (error) {
+            console.error("Error deleting user:", error);
+            Swal.fire("Error", "Error deleting user", "error");
+        }
+    }
+}
+
+// Call the function to fetch all users when the page loads
+fetchAllUsers();
+
+
 // ----- ---------------------------------- ----- //
-
-
-
 
 async function handleTokenBasedNavigation() {
 

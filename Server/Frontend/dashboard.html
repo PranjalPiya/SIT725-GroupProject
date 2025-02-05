@@ -231,7 +231,7 @@
             <nav class="nav">
                 <div class="nav-upper-options">
                     <!-- Assign a data-target that matches the id of the content section -->
-                    <div class="nav-option option1 active" data-target="dashboardContent">
+                    <div class="nav-option option1 active" data-target="usersContent">
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
                             class="nav-img" alt="dashboard" />
                         <h3>Users</h3>
@@ -259,13 +259,27 @@
         <!-- Main Content -->
         <div class="main">
             <!-- Content Section for Dashboard -->
-            <div id="dashboardContent" class="content-section active">
-                <h1>Dashboard</h1>
-                <!-- Put your Dashboard-specific content here -->
-                <div class="box-container">
-                    <!-- ... existing dashboard boxes ... -->
+            <div id="usersContent" class="content-section active">
+                <h1>All Users</h1>
+                <div id="usersList">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Gender</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersListBody">
+                            <!-- All users will be dynamically populated here -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
 
             <!-- Content Section for Treks -->
             <div id="treksContent" class="content-section">

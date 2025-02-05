@@ -115,7 +115,7 @@ const getAgencyBookings = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const getAllBookings = asyncHandler(async (req, res) => {
   const bookings = await Booking.find()
-    .populate('userId', 'name email')      // Populate user details
+    .populate('userId', 'fullName email')      // Populate user details
     .populate('trekId', 'name description')  // Populate trek details
     .populate('agencyId', 'name')           // Populate agency details
     .sort('-createdAt');

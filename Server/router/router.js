@@ -1,5 +1,5 @@
 const express = require('express');
-const { signup, login, logout, forgotPassword } = require('../controller/authController');
+const { getAllUsers, deleteUser, signup, login, logout, forgotPassword } = require('../controller/authController');
 
 const router = express.Router();
 const { protect, admin } = require('../middleware/authMiddleware');
@@ -9,6 +9,11 @@ router.post('/register', signup);
 router.post('/login', login);
 router.post('/logout', logout);
 router.post('/forgot-password', forgotPassword);
+//
+router.get('/all', protect, admin, getAllUsers); // Admin: Get all users
+router.delete('/:id', protect, admin, deleteUser); // Admin: Delete user by ID
+
+
 
 // Endpoint to return current user details
 router.get('/me', protect, (req, res) => {
