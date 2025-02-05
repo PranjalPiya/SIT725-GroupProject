@@ -116,6 +116,7 @@ app.use('/api/bookings', bookingRoutes);
 // Fallback to index.html for any other requests (good for SPA routing)
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'Frontend', 'index.html'));
+    res.sendFile(path.join(__dirname, 'Frontend', 'index.html'));
 });
 
 // Centralized error handling middleware (optional but recommended)
