@@ -1,20 +1,26 @@
-# Use an official Node.js runtime
-FROM node:18
+# Use a newer Node.js version
+FROM node:14-alpine
 
-# Set the working directory inside the container
-WORKDIR /usr/src/app
+# Create a directory for the application inside the container
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
-# Copy package.json first (skip package-lock.json if missing)
-COPY package.json ./
+# Set the working directory for the application
+WORKDIR /home/node/app
 
-# Install dependencies inside the container
-RUN npm install --force
+# Copy package.json and package-lock.json to leverage Docker cache
+COPY package*.json ./
 
-# Copy the rest of the application files
-COPY . .
+# Switch to the 'node' user to avoid running the application as root
+USER node
 
-# Expose the application port (change if needed)
-EXPOSE 3000
+# Install the application dependencies using npm
+RUN npm install
 
-# Run the application
-CMD ["node", "app.js"]
+# Copy the rest of the application source code into the container
+COPY --chown=node:node . .
+
+# Expose the port the application listens on
+EXPOSE 8080
+
+# Define the command to start the application
+CMD [ "node", "app.js" ]
