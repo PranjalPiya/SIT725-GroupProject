@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="responsive.css" />
     <!-- Include SweetAlert2 CSS if needed -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
     <style>
         /* Optional: simple style to hide content sections */
         .content-section {
@@ -19,10 +22,105 @@
         .content-section.active {
             display: block;
         }
+
+        #chatToggleButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        /* Chat Widget Container */
+        #chatWidget {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 300px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        #chatHeader {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #chatBody {
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        #chatMessages {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #chatMessages li {
+            margin-bottom: 10px;
+            padding: 5px;
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        #chatInputContainer {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        #chatInput {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #sendButton {
+            margin-left: 10px;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
+    <!-- Floating Chat Toggle Button -->
+    <button id="chatToggleButton">Chat</button>
+
+    <!-- Chat Widget -->
+    <div id="chatWidget">
+        <div id="chatHeader">Chat</div>
+        <div id="chatBody">
+            <ul id="chatMessages"></ul>
+        </div>
+        <div id="chatInputContainer">
+            <input id="chatInput" type="text" placeholder="Type a message..." />
+            <button id="sendButton">Send</button>
+        </div>
+    </div>
     <!-- Header -->
     <header>
         <div class="logosec">
@@ -100,8 +198,6 @@
                     </table>
                 </div>
             </div>
-
-
             <!-- Content Section for Treks -->
             <div id="treksContent" class="content-section">
                 <h1>Treks</h1>
@@ -206,6 +302,46 @@
                     </div>
                 </section>
             </div>
+
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Connect to Socket.IO
+                    const socket = io();
+
+                    // Toggle chat widget display
+                    const chatToggleButton = document.getElementById("chatToggleButton");
+                    const chatWidget = document.getElementById("chatWidget");
+                    chatToggleButton.addEventListener("click", function () {
+                        if (chatWidget.style.display === "none" || chatWidget.style.display === "") {
+                            chatWidget.style.display = "block";
+                        } else {
+                            chatWidget.style.display = "none";
+                        }
+                    });
+
+                    // Send message on clicking the send button
+                    const sendButton = document.getElementById("sendButton");
+                    const chatInput = document.getElementById("chatInput");
+                    sendButton.addEventListener("click", function () {
+                        const message = chatInput.value.trim();
+                        if (message) {
+                            socket.emit("chat message", message);
+                            chatInput.value = "";
+                        }
+                    });
+
+                    // Listen for incoming messages and display them
+                    socket.on("chat message", function (msg) {
+                        const li = document.createElement("li");
+                        li.textContent = msg;
+                        document.getElementById("chatMessages").appendChild(li);
+                        // Auto-scroll to the bottom of the chat body
+                        const chatBody = document.getElementById("chatBody");
+                        chatBody.scrollTop = chatBody.scrollHeight;
+                    });
+                });
+            </script>
 
             <!-- Scripts -->
             <script src="js/dashboard.js"></script>
