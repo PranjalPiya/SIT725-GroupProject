@@ -44,7 +44,14 @@ if (signupForm) {
                     window.location.href = '/login.html';
                 });;
             } else {
-                alert(`Error: ${result.message}`);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: result.message,
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+                // alert(`Error: ${result.message}`);
             }
         } catch (error) {
             console.error('Error during signup:', error);

@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', function () {
   // 1. Token-based navigation logic
 
@@ -45,6 +47,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   }
 
+
+
+
+
   // 2. Carousel logic
   function initCarousel() {
     const track = document.querySelector('.carousel-track');
@@ -83,8 +89,15 @@ document.addEventListener('DOMContentLoaded', function () {
     updateCarousel(); // Initialize carousel
   }
 
+
+
+
+
+
   // Execute both functions after DOMContentLoaded event
+
   handleTokenBasedNavigation();
+  // getSpecificTrekDetails();
   initCarousel();
 });
 
