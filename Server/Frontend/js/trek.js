@@ -4,7 +4,6 @@ if (bookBtn) {
         event.preventDefault(); // Prevent any default behavior, if applicable.
         const urlParams = new URLSearchParams(window.location.search);
         const trekId = urlParams.get('id'); // Use 'id' instead of 'trekId'
-        console.log('trekIdk ho booking page ma pugesi:', trekId); // Log trekId for debugging
 
         if (!trekId) {
             alert('Invalid Trek ID!');
