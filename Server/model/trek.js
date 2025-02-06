@@ -55,6 +55,11 @@ const trekDestinationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    // New location field
+    location: {
+        type: String, // You can use String for location (e.g., city name, coordinates, etc.)
+        required: true
+    },
 
     // New fields for reviews and ratings
     reviews: [reviewSchema], // Array of reviews

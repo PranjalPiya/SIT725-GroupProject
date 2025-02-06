@@ -13,6 +13,7 @@ const createTrekDestination = async (req, res) => {
         maxAltitude,
         bestSeason,
         trekMap,
+        location,
         totalDistance
     } = req.body;
     try {
@@ -26,6 +27,7 @@ const createTrekDestination = async (req, res) => {
             !maxAltitude ||
             !bestSeason ||
             !trekMap ||
+            !location ||
             !totalDistance
         ) {
             console.error('Missing trek fields');
@@ -43,6 +45,7 @@ const createTrekDestination = async (req, res) => {
             maxAltitude,
             bestSeason,
             trekMap,
+            location,
             totalDistance
         });
 
@@ -376,6 +379,8 @@ const deleteUserReview = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
+
 
 
 

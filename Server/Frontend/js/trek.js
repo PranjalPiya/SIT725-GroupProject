@@ -46,9 +46,7 @@ if (bookBtn) {
 
 
 
-document.addEventListener('DOMContentLoaded', async function () {
-
-
+document.addEventListener('DOMContentLoaded', function () {
 
     async function getSpecificTrekDetails() {
         // Extract trek ID from the URL
@@ -73,6 +71,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             const trek = await response.json();
 
             if (response.ok) {
+
                 // Populate other trek details...
                 document.getElementById('trek-title').textContent = trek.name;
                 document.getElementById('trek-name').textContent = trek.name;
@@ -83,6 +82,15 @@ document.addEventListener('DOMContentLoaded', async function () {
                 document.getElementById('best-season').textContent = trek.bestSeason;
                 document.getElementById('total-distance').textContent = trek.totalDistance;
                 document.getElementById('expenses').textContent = trek.expenses;
+                document.getElementById('location').textContent = trek.location;
+
+                // If trek includes a location, fetch and display weather info.
+                if (trek.location) {
+                    displayWeatherForTrek(trek.location);
+                } else {
+                    document.getElementById('weatherInfo').innerHTML = `<p>No location data available.</p>`;
+                }
+
 
                 // ----- SLIDER SETUP -----
                 const slider = document.getElementById('slider');
@@ -143,14 +151,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                 if (trek.reviews && trek.reviews.length > 0) {
                     // Filter out the current user's review from the general list of reviews
                     const filteredReviews = trek.reviews.filter(review => {
-                        console.log(`userId :${userId} , review userId: ${review.user._id}`)
-
-                        if (review.user._id === userId) {
-                            currentUserReview.review = review; // Store current user's review for later
-                            return false; // Don't add this review to the list of general reviews
+                        console.log(`userId: ${userId}, review userId: ${review.user._id}`);
+                        if (review.user?._id === userId) {
+                            currentUserReview.review = review;
+                            return false;
                         }
-                        return true; // Include other reviews
+                        return true;
                     });
+
 
                     // Display the remaining reviews
                     filteredReviews.forEach(review => {
@@ -225,8 +233,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                     // User is not logged in, optionally show a login prompt
                     myReviewSection.innerHTML = `<p>Please log in to submit a review.</p>`;
                 }
-
-
             }
         } catch (error) {
             console.error('Error fetching trek details:', error);
@@ -423,3 +429,39 @@ async function addReview() {
 
 
 
+
+
+// Weather API integration:
+const apiKey = 'f53d6f395a446958508b380ba021d7d5'; // Replace with your actual OpenWeatherMap API key
+const weatherBaseURL = 'https://api.openweathermap.org/data/2.5/weather';
+
+// Fetch weather data for a given location
+function fetchWeatherForLocation(location) {
+    const url = `${weatherBaseURL}?q=${encodeURIComponent(location)}&appid=${apiKey}&units=metric`;
+    return fetch(url)
+        .then(response => response.json())
+        .catch(error => {
+            console.error('Error fetching weather data:', error);
+            return null;
+        });
+}
+
+// Display weather data in the #weatherInfo container
+function displayWeatherForTrek(location) {
+    const weatherContainer = document.getElementById('weatherInfo');
+    fetchWeatherForLocation(location).then(data => {
+        if (data && data.cod === 200) {
+            const weatherDescription = data.weather[0].description;
+            const temperature = data.main.temp;
+            const icon = data.weather[0].icon;
+            weatherContainer.innerHTML = `
+                <h4>Weather</>
+            <p>${weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1)}</p>
+                <p><strong>${temperature}°C</strong></p>
+                <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" />
+            `;
+        } else {
+            weatherContainer.innerHTML = `<p>Weather data not available for ${location}</p>`;
+        }
+    });
+}
