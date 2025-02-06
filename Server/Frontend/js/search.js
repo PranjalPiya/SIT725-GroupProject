@@ -68,12 +68,14 @@ function displaySearchResults(treks) {
 
     // Display the filtered treks
     const resultsHTML = treks.map(trek => `
+        <a href="specific_trek.html?id=${trek._id}" class="trek-link" style="text-decoration: none; color: inherit;">
         <div class="trek-card">
             <h3>${trek.name}</h3>
             <p><strong>Difficulty:</strong> ${trek.difficultyLevel}</p>
             <p><strong>Max Altitude:</strong> ${trek.maxAltitude} meters</p>
             <p><strong>Best Season:</strong> ${trek.bestSeason}</p>
         </div>
+        </a>
     `).join('');
 
     modalSearchResults.innerHTML = resultsHTML;

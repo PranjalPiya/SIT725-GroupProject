@@ -140,6 +140,28 @@ const deleteUser = async (req, res) => {
     }
 };
 
+// Edit User Profile (for authenticated users)
+const editUserProfile = async (req, res) => {
+    try {
+        // Get the updates from request body
+        const updates = req.body;
+        const userId = req.user._id; // Protected route ensures req.user is populated
+
+        // If the update includes a new password, hash it before updating
+        if (updates.password) {
+            updates.password = await bcrypt.hash(updates.password, 10);
+        }
+
+        // Update the user; using runValidators to ensure updated data passes the schema validations
+        const updatedUser = await User.findByIdAndUpdate(userId, updates, { new: true, runValidators: true }).select('-password');
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json({ message: 'Profile updated successfully', user: updatedUser });
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating profile', error: error.message });
+    }
+};
 
 
-module.exports = { getAllUsers, deleteUser, signup, login, logout, forgotPassword };
+module.exports = { editUserProfile, getAllUsers, deleteUser, signup, login, logout, forgotPassword };

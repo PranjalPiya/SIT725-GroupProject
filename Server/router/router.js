@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllUsers, deleteUser, signup, login, logout, forgotPassword } = require('../controller/authController');
+const { editUserProfile, getAllUsers, deleteUser, signup, login, logout, forgotPassword } = require('../controller/authController');
 
 const router = express.Router();
 const { protect, admin } = require('../middleware/authMiddleware');
@@ -13,6 +13,8 @@ router.post('/forgot-password', forgotPassword);
 router.get('/all', protect, admin, getAllUsers); // Admin: Get all users
 router.delete('/:id', protect, admin, deleteUser); // Admin: Delete user by ID
 
+// Edit user profile
+router.put('/profile', protect, editUserProfile);
 
 
 // Endpoint to return current user details

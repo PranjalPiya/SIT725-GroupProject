@@ -385,6 +385,171 @@ async function deleteUser(userId) {
 fetchAllUsers();
 
 
+
+// ============== Agencies Management ===== //
+let editingAgencyId = null;
+
+// Handle Create/Update Form Submission
+document.getElementById("createAgencyForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const agencyData = {
+        name: document.getElementById("agencyName").value,
+        email: document.getElementById("agencyEmail").value,
+        phone: document.getElementById("agencyPhone").value,
+        address: document.getElementById("agencyAddress").value,
+        description: document.getElementById("agencyDescription").value,
+        image: document.getElementById("agencyImage").value,
+        services: document.getElementById("agencyServices").value.split(',').map(s => s.trim()),
+    };
+
+    // If editingAgencyId is set, update the agency; otherwise, create a new one.
+    if (editingAgencyId) {
+        try {
+            const response = await fetch(`http://localhost:3000/api/agencies/${editingAgencyId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(agencyData),
+            });
+            if (response.ok) {
+                Swal.fire("Success", "Agency updated successfully", "success");
+                editingAgencyId = null;
+                document.getElementById("agency-form-title").innerText = "Create New Agency";
+                document.getElementById("createAgencyForm").reset();
+                fetchAgencies();
+            } else {
+                const errorResult = await response.json();
+                Swal.fire("Error", errorResult.message || "Error updating agency", "error");
+            }
+        } catch (error) {
+            console.error("Error updating agency:", error);
+            Swal.fire("Error", "Error updating agency", "error");
+        }
+    } else {
+        // Create a new agency
+        try {
+            const response = await fetch("http://localhost:3000/api/agencies", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(agencyData),
+            });
+            if (response.ok) {
+                Swal.fire("Success", "Agency created successfully", "success");
+                document.getElementById("createAgencyForm").reset();
+                fetchAgencies();
+            } else {
+                const errorResult = await response.json();
+                Swal.fire("Error", errorResult.message || "Error creating agency", "error");
+            }
+        } catch (error) {
+            console.error("Error creating agency:", error);
+            Swal.fire("Error", "Error creating agency", "error");
+        }
+    }
+});
+
+// Fetch all agencies from the API
+async function fetchAgencies() {
+    try {
+        const response = await fetch("http://localhost:3000/api/agencies", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        });
+        if (response.ok) {
+            const agencies = await response.json();
+            populateAgenciesList(agencies);
+        } else {
+            console.error("Error fetching agencies");
+        }
+    } catch (error) {
+        console.error("Error fetching agencies:", error);
+    }
+}
+
+// Populate the agencies table
+function populateAgenciesList(agencies) {
+    const agencyListBody = document.getElementById("agencyListBody");
+    agencyListBody.innerHTML = ""; // Clear previous content
+
+    agencies.forEach((agency) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+      <td>${agency.name}</td>
+      <td>${agency.email}</td>
+      <td>${agency.phone}</td>
+      <td>${agency.address}</td>
+      <td>${agency.description}</td>
+      <td>${agency.services.join(', ')}</td>
+      <td>
+        <button class="action-btn edit-btn" onclick="editAgency('${agency._id}')">Edit</button>
+        <button class="action-btn delete-btn" onclick="deleteAgency('${agency._id}')">Delete</button>
+      </td>
+    `;
+        agencyListBody.appendChild(tr);
+    });
+}
+
+// Edit: Fetch a single agency and prefill the form
+async function editAgency(agencyId) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/agencies/${agencyId}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        });
+        if (response.ok) {
+            const agency = await response.json();
+            document.getElementById("agencyName").value = agency.name;
+            document.getElementById("agencyEmail").value = agency.email;
+            document.getElementById("agencyPhone").value = agency.phone;
+            document.getElementById("agencyAddress").value = agency.address;
+            document.getElementById("agencyDescription").value = agency.description;
+            document.getElementById("agencyImage").value = agency.image;
+            document.getElementById("agencyServices").value = agency.services.join(', ');
+
+            editingAgencyId = agencyId;
+            document.getElementById("agency-form-title").innerText = "Edit Agency";
+        } else {
+            Swal.fire("Error", "Error fetching agency data for editing", "error");
+        }
+    } catch (error) {
+        console.error("Error fetching agency for edit:", error);
+        Swal.fire("Error", "Error fetching agency data for editing", "error");
+    }
+}
+
+// Delete: Remove an agency
+async function deleteAgency(agencyId) {
+    const confirmResult = await Swal.fire({
+        title: "Confirm Deletion",
+        text: "Are you sure you want to delete this agency?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+    });
+
+    if (confirmResult.isConfirmed) {
+        try {
+            const response = await fetch(`http://localhost:3000/api/agencies/${agencyId}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+            });
+            if (response.ok) {
+                Swal.fire("Deleted", "Agency deleted successfully", "success");
+                fetchAgencies(); // Refresh the list
+            } else {
+                const errorResult = await response.json();
+                Swal.fire("Error", errorResult.message || "Error deleting agency", "error");
+            }
+        } catch (error) {
+            console.error("Error deleting agency:", error);
+            Swal.fire("Error", "Error deleting agency", "error");
+        }
+    }
+}
+
+
+
+
 // ----- ---------------------------------- ----- //
 
 async function handleTokenBasedNavigation() {
@@ -430,9 +595,16 @@ async function handleTokenBasedNavigation() {
 
 }
 
+
+
+
+
+
+
 // On page load, fetch all trek destinations
 document.addEventListener("DOMContentLoaded", () => {
     fetchTrekDestinations();
     fetchAllBookings();
+    fetchAgencies();
     handleTokenBasedNavigation();
 });
