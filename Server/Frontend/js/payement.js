@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         e.preventDefault();
 
         // Fetch the client secret from the server
-        const response = await fetch('http://localhost:3000/api/payements/confirm-payement', {
+        const response = await fetch('http://localhost:3000/api/payement/confirm-payement', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             paymentStatus.classList.add('error');
         } else if (paymentIntent.status === 'succeeded') {
             // On successful payment, update the booking status
-            const updateResponse = await fetch(`http://localhost:3000/api/payements/${bookingId}/confirm-payement`, {
+            const updateResponse = await fetch(`http://localhost:3000/api/payement/${bookingId}/confirm-payement`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -58,8 +58,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
 
             if (updateResponse.ok) {
-                paymentStatus.textContent = 'Payment successful! Your booking is confirmed.';
-                paymentStatus.classList.add('success');
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Payment successful! Your booking is confirmed.",
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    // Redirect to login page after user clicks OK.
+                    window.location.href = '/index.html';
+                });;
+                // paymentStatus.textContent = 'Payment successful! Your booking is confirmed.';
+                // paymentStatus.classList.add('success');
                 // window.location.href = '/booking-confirmation.html';  // Redirect to a confirmation page
             } else {
                 const errorData = await updateResponse.json();
