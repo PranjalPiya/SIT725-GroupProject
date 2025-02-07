@@ -9,7 +9,55 @@ menuicn.addEventListener("click", () => {
 });
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Define the current role for this page
+    const currentRole = "admin"; // This page is for the admin
 
+    // Connect to Socket.IO
+    const socket = io();
+
+    // Toggle chat widget display
+    const chatToggleButton = document.getElementById("chatToggleButton");
+    const chatWidget = document.getElementById("chatWidget");
+    chatToggleButton.addEventListener("click", function () {
+        if (chatWidget.style.display === "none" || chatWidget.style.display === "") {
+            chatWidget.style.display = "block";
+        } else {
+            chatWidget.style.display = "none";
+        }
+    });
+
+    // Send message on clicking the send button
+    const sendButton = document.getElementById("sendButton");
+    const chatInput = document.getElementById("chatInput");
+    sendButton.addEventListener("click", function () {
+        const messageText = chatInput.value.trim();
+        if (messageText) {
+            // Emit an object containing both the sender and the text
+            socket.emit("chat message", { sender: currentRole, text: messageText });
+            chatInput.value = "";
+        }
+    });
+
+    // Listen for incoming messages and display them with appropriate styling
+    socket.on("chat message", function (msg) {
+        const li = document.createElement("li");
+        li.textContent = msg.text;
+
+        // Apply a class based on who sent the message
+        if (msg.sender === currentRole) {
+            li.classList.add("sent"); // For messages sent by the admin (could be styled to appear on the right)
+        } else {
+            li.classList.add("received"); // For messages received from the user (left side)
+        }
+
+        document.getElementById("chatMessages").appendChild(li);
+
+        // Auto-scroll to the bottom of the chat body
+        const chatBody = document.getElementById("chatBody");
+        chatBody.scrollTop = chatBody.scrollHeight;
+    });
+});
 
 
 // Tab switching for nav options
@@ -594,6 +642,8 @@ async function handleTokenBasedNavigation() {
 
 
 }
+
+
 
 
 
