@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const data = await response.json();
         console.log('User data:', data);
 
+
         // Show profile and logout buttons
         if (navAuth && navProfile) {
           navAuth.style.display = 'none';

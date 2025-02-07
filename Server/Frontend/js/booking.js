@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const agencyApiUrl = "http://localhost:3000/api/agencies";
 
+
+
+
+
     async function fetchAgencies() {
         try {
             const response = await fetch(agencyApiUrl);
@@ -36,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    fetchAgencies();
 
     bookingForm.addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -102,4 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
             bookingStatus.classList.add('error');
         }
     });
+    fetchAgencies();
+
+    findUser();
 });
