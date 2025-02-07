@@ -65,5 +65,5 @@ io.on('connection', (socket) => {
 
 // Start the server on specified port from .env or default 3000
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
