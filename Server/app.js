@@ -30,12 +30,16 @@ const trekRoutes = require('./router/trekRouter');         // Trek related route
 const agencyRoutes = require('./router/agencyRoutes');     // Agency related routes
 const bookingRoutes = require('./router/bookingRoutes');   // Booking routes
 const paymentRoutes = require('./router/payementRoutes'); // Payment routes
+const guidesRouter = require('./router/guideRoutes');
+
 // Mount routes with base paths
 app.use('/api/user', userRoutes);
 app.use('/api/treks', trekRoutes);
 app.use('/api/agencies', agencyRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/payement', paymentRoutes);
+app.use('/api/guides', guidesRouter);
+
 // Fallback to index.html for any other requests (good for SPA routing)
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'Frontend', 'index.html'));
