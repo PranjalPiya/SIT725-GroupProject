@@ -1,14 +1,15 @@
-/* Reset */
+/* ---------- Reset ---------- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body and Container */
+/* ---------- Background Image with Transparent Overlay ---------- */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f7f7f7;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)),
+        url("https://cdn.kimkim.com/files/a/images/2111653fb8b1045737fc22fe6f5e3bdd004e4019/original-d3ac590e3a68dfa796ad7750c7dc857a.jpg") no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,16 +17,17 @@ body {
     margin: 0;
 }
 
+/* ---------- Booking Container ---------- */
 .booking-container {
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
+    max-width: 800px;
+    width: 90%;
     padding: 20px;
-    width: 100%;
 }
 
-/* Header */
+/* ---------- Form Heading & Trek Details ---------- */
 .form-heading {
     font-size: 2rem;
     font-weight: bold;
@@ -34,7 +36,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Trek Details */
 .trek-details {
     text-align: center;
     margin-bottom: 25px;
@@ -52,9 +53,33 @@ body {
     margin-top: 5px;
 }
 
-/* Form Fields */
+/* ---------- Booking Form Layout ---------- */
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ---------- Rows for Paired Fields ---------- */
+.form-row {
+    display: flex;
+    gap: 15px;
+    /* Reduced gap between fields in a row */
+}
+
+.form-row .form-field {
+    flex: 1;
+}
+
+/* Use full-width for certain fields */
+.full-width {
+    width: 100%;
+}
+
+/* ---------- Form Field Styles ---------- */
 .booking-form .form-field {
-    margin-bottom: 20px;
+    margin-bottom: 0;
+    /* Gap is managed by the parent container */
 }
 
 .booking-form label {
@@ -62,23 +87,27 @@ body {
     font-weight: bold;
     color: #333;
     margin-bottom: 5px;
+    font-size: 0.95rem;
 }
 
-.booking-form input {
+.booking-form input,
+.booking-form select {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
+    /* Slightly reduced padding for a more compact look */
     border: 2px solid #ddd;
     border-radius: 8px;
     font-size: 1rem;
     transition: border-color 0.3s ease-in-out;
 }
 
-.booking-form input:focus {
+.booking-form input:focus,
+.booking-form select:focus {
     border-color: #4CAF50;
     outline: none;
 }
 
-/* Submit Button */
+/* ---------- Submit Button ---------- */
 .btn-submit {
     width: 100%;
     padding: 15px;
@@ -95,7 +124,7 @@ body {
     background-color: #45a049;
 }
 
-/* Status Message */
+/* ---------- Status Message ---------- */
 .status-message {
     text-align: center;
     margin-top: 20px;
@@ -114,31 +143,20 @@ body {
     background-color: #fce4e4;
 }
 
-/* Styling the Agency Select Dropdown */
+/* ---------- Custom Styling for the Select Dropdown ---------- */
 .booking-form select {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
     background-color: #fff;
     color: #333;
-    transition: border-color 0.3s ease-in-out;
-    appearance: none; /* Remove default dropdown arrow */
-    -webkit-appearance: none; /* Remove default dropdown arrow in Safari */
-    -moz-appearance: none; /* Remove default dropdown arrow in Firefox */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     cursor: pointer;
+    position: relative;
 }
 
-/* Focus Effect */
-.booking-form select:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
-
-/* Custom arrow */
+/* Optional: Custom arrow for the dropdown */
 .booking-form select::after {
-    content: '▼'; /* Unicode character for down arrow */
+    content: '▼';
     position: absolute;
     right: 15px;
     top: 50%;
@@ -147,12 +165,6 @@ body {
     color: #333;
 }
 
-/* Style for the select container to ensure the arrow stays aligned */
-.booking-form .form-field {
-    position: relative;
-}
-
-/* Add a slight hover effect */
 .booking-form select:hover {
     border-color: #4CAF50;
 }

@@ -595,6 +595,164 @@ async function deleteAgency(agencyId) {
     }
 }
 
+// ============== GUides Management ===== //
+
+// Global variable to track editing mode
+let editingGuideId = null;
+
+// Fetch all guides from the API and populate the table
+async function fetchGuides() {
+    try {
+        const response = await fetch("http://localhost:3000/api/guides", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (response.ok) {
+            const guides = await response.json();
+            populateGuideList(guides);
+        } else {
+            console.error("Error fetching guides:", response.status);
+        }
+    } catch (error) {
+        console.error("Error fetching guides:", error);
+    }
+}
+
+// Populate the guide list table with data
+function populateGuideList(guides) {
+    const guideListBody = document.getElementById("guideListBody");
+    guideListBody.innerHTML = ""; // Clear existing content
+
+    guides.forEach((guide) => {
+        const tr = document.createElement("tr");
+        // Limit description length for the table view
+        const shortDescription =
+            guide.description.split(" ").length > 20
+                ? guide.description.split(" ").slice(0, 20).join(" ") + "..."
+                : guide.description;
+        tr.innerHTML = `
+      <td>${guide.title}</td>
+      <td>${guide.category}</td>
+      <td>${guide.author}</td>
+      <td>${shortDescription}</td>
+      <td>
+        <button class="action-btn edit-btn" onclick="editGuide('${guide._id}')">Edit</button>
+        <button class="action-btn delete-btn" onclick="deleteGuide('${guide._id}')">Delete</button>
+      </td>
+    `;
+        guideListBody.appendChild(tr);
+    });
+}
+
+// Handle form submission for creating/updating a guide
+document.getElementById("createGuideForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    // Gather form data
+    const guideData = {
+        title: document.getElementById("guideTitle").value,
+        description: document.getElementById("guideDescription").value,
+        content: document.getElementById("guideContent").value,
+        category: document.getElementById("guideCategory").value,
+        featuredImage: document.getElementById("guideFeaturedImage").value,
+        images: document.getElementById("guideImages").value.split(",").map(img => img.trim()),
+        tags: document.getElementById("guideTags").value.split(",").map(tag => tag.trim()),
+        author: document.getElementById("guideAuthor").value
+    };
+
+    if (editingGuideId) {
+        // Update existing guide
+        try {
+            const response = await fetch(`http://localhost:3000/api/guides/${editingGuideId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(guideData)
+            });
+            if (response.ok) {
+                Swal.fire("Success", "Guide updated successfully", "success");
+                editingGuideId = null;
+                document.getElementById("guide-form-title").innerText = "Create New Guide";
+                document.getElementById("createGuideForm").reset();
+                fetchGuides();
+            } else {
+                const errorResult = await response.json();
+                Swal.fire("Error", errorResult.message || "Error updating guide", "error");
+            }
+        } catch (error) {
+            Swal.fire("Error", "Error updating guides", "error");
+        }
+    } else {
+        // Create new guide
+        try {
+            const response = await fetch("http://localhost:3000/api/guides", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(guideData)
+            });
+            if (response.ok) {
+                alert("Guide created successfully");
+                document.getElementById("createGuideForm").reset();
+                fetchGuides();
+            } else {
+                const errorResult = await response.json();
+                alert(errorResult.message || "Error creating guide");
+            }
+        } catch (error) {
+            console.error("Error creating guide:", error);
+        }
+    }
+});
+
+// Expose editGuide to the global scope so it can be called from inline onclick
+window.editGuide = async function (guideId) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/guides/${guideId}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (response.ok) {
+            const guide = await response.json();
+            // Pre-fill the form with the guide's data
+            document.getElementById("guideTitle").value = guide.title;
+            document.getElementById("guideDescription").value = guide.description;
+            document.getElementById("guideContent").value = guide.content;
+            document.getElementById("guideCategory").value = guide.category;
+            document.getElementById("guideFeaturedImage").value = guide.featuredImage;
+            document.getElementById("guideImages").value = guide.images.join(", ");
+            document.getElementById("guideTags").value = guide.tags.join(", ");
+            document.getElementById("guideAuthor").value = guide.author;
+
+            editingGuideId = guideId;
+            document.getElementById("guide-form-title").innerText = "Edit Guide";
+        } else {
+            alert("Error fetching guide details");
+        }
+    } catch (error) {
+        console.error("Error fetching guide:", error);
+    }
+};
+
+// Expose deleteGuide to the global scope so it can be called from inline onclick
+window.deleteGuide = async function (guideId) {
+    if (confirm("Are you sure you want to delete this guide?")) {
+        try {
+            const response = await fetch(`http://localhost:3000/api/guides/${guideId}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" }
+            });
+            if (response.ok) {
+                alert("Guide deleted successfully");
+                fetchGuides();
+            } else {
+                const errorResult = await response.json();
+                alert(errorResult.message || "Error deleting guide");
+            }
+        } catch (error) {
+            console.error("Error deleting guide:", error);
+        }
+    }
+};
+
 
 
 
@@ -644,17 +802,12 @@ async function handleTokenBasedNavigation() {
 }
 
 
-
-
-
-
-
-
-
 // On page load, fetch all trek destinations
 document.addEventListener("DOMContentLoaded", () => {
     fetchTrekDestinations();
     fetchAllBookings();
     fetchAgencies();
+    fetchGuides();
+
     handleTokenBasedNavigation();
 });
